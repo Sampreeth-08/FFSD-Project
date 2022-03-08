@@ -352,6 +352,10 @@ body{
     flex-grow: 1;
 }
 
+.events{
+    font-weight: 900;
+}
+
 
 /*Login form*/
 .form-container{
@@ -382,5 +386,5 @@ body{
 
 .form-content .logo .img{
     max-width: 100%;
-    
+
 }
