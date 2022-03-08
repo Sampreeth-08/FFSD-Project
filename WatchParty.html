@@ -28,18 +28,59 @@
             </div>
     </nav>
     <div class="Container">
-        <div class="info">
-            <div class="user">
-
-                <div class="profile-pic">
-                    <img src="assets/imgs/" alt="" srcset="">
-                    <p class="username">Gana Jayant</p>
-                </div>
-            </div>
-        </div>
-
+        <video id="video" onpause="pausou()" onplay="playr()" autoplay controls muted><source src="//www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4" type="video/mp4"></video>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
 
+            var socket = io();
+
+    		socket.emit('joining msg', name);
+
+    		$('form').submit(function(e) {
+    			e.preventDefault();            // nao recarregar pagina
+      			socket.emit('chat message', (name + ':  ' + $('#m').val()));
+                $('#messages').prepend($('<li id="list">').text('Você:  ' + $('#m').val()));
+      			$('#m').val('');
+      			return false;
+    		});
+    		socket.on('chat message', function(msg){
+                  $('#messages').prepend($('<li>').text(msg));
+                    if (msg == "!sync") {
+                        syncar();
+                    }
+    		});
+    		socket.on('pauseg', function(usr){
+                console.log("pause?")
+                if (usr != name)
+                if (!($('#video')[0].paused))
+                    $('#video')[0].pause();
+            });
+    		socket.on('playg', function(usr){
+                console.log("play?")
+                if (usr != name)
+                if ($('#video')[0].paused)
+                    $('#video')[0].play();
+            });
+    		socket.on('sett', function(usr){
+                $('#video')[0].currentTime = usr;
+            });
+
+            function pausou() {
+                socket.emit('pause', name);
+            }
+            function playr() {
+                socket.emit('play', name);
+            }
+            function syncar() {
+                var obj = {name: name, time: $['#video'].currentTime };
+                socket.emit('sync', name);
+            }
+
+    </script>
+    <script>
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
