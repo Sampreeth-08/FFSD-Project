@@ -73,3 +73,314 @@ body{
     margin: 0 10px;
     display: inline-block;
 }
+
+.user-profile{
+    width: 22px;
+    border-radius: 50%;
+}
+
+.main{
+    width: 100%;
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.wrapper{
+    width: 70%;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-gap: 30px;
+}
+
+.profile-pic{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 3px;
+    background: linear-gradient(45deg,rgb(0, 0, 0),rgb(45, 231, 54) 80%);
+}
+
+.left-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-pic img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+.username{
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 5px;
+    color: rgba(0,0,0,0.5);
+}
+
+.post{
+    width: 100%;
+    height: 600px;
+    background: #fff;
+    border: 1px solid #dfdfdf;
+    margin-top: 10px;
+}
+
+.info{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.info .username{
+    width: auto;
+    font-weight: bold;
+    font-size: 14px;
+    color: #000;
+    margin-left: 10px;
+}
+
+.info .options{
+    height: 10px;
+    cursor: pointer;
+}
+
+.info .user{
+    display: flex;
+    align-items: center;
+}
+
+.info .profile-pic{
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: none;
+}
+
+.info .profile-pic img{
+    border: none;
+}
+
+.post-image{
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.post-content{
+    width: 100%;
+    padding: 20px;
+}
+
+.likes{
+    font-weight: bold;
+}
+
+.description{
+    margin: 10px 0;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.description span{
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.pos-time{
+    color:rgb(0,0,0,0.5);
+    font-size: 12px;
+}
+
+.comment-wrapper{
+    width: 100%;
+    height: 50px;
+    border-radius: 1px solid #dfdfdf;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comment-wrapper .icon{
+    height: 30px;
+    border-radius: 50%;
+}
+
+.comment-box{
+    width: 80%;
+    height: 50px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+.comment-btn, .logout-btn{
+    width: 70px;
+    height: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    text-transform: capitalize;
+    font-size: 16px;
+    color: (0,162,255);
+    opacity: 0.5;
+}
+
+.reaction-wrapper{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    margin-top: -20px;
+    align-items: center;
+}
+
+.reaction-wrapper .icon{
+    height: 25px;
+    margin: 0;
+    margin-right: 20px;
+}
+
+.right-col{
+    padding: 20px;
+}
+
+.profile-card{
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.profile-card .profile-pic{
+    flex: 0 0 auto;
+    padding: 0;
+    background: none;
+    width: 70px;
+    height: 70px;
+    margin-right: 10px;
+}
+
+.profile-card .profile-pic img{
+    border: none;
+    width: 70px;
+    height: 70px;
+}
+
+.profile-card .username{
+    font-weight: 500;
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 0;
+}
+
+.profile-card .sub-text{
+    color: rgba(0,0,0,0.5);
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 2px;
+    margin-bottom: 0;
+}
+
+.logout-btn{
+    opacity: 1;
+    font-weight: 700;
+    font-size: 12px;
+
+}
+
+/*For medium screens*/
+@media (max-width: 1100px){
+    .right-col, .search-box{
+        display: none;
+    }
+
+    .nav-wrapper, .wrapper{
+        width: 90%;
+    }
+
+    .wrapper{
+        display: block;
+    }
+}
+
+/*For small screens*/
+@media (max-width: 500px){
+    .nav-items .icon{
+        margin: 0 5px;
+    }
+
+    .post-image{
+        height: 300px;
+    }
+}
+
+
+
+
+
+
+/*Login*/
+.container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container{
+    display: flex;
+    flex-grow: 1;
+}
+
+.main-content{
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 930px;
+    flex-grow: 1;
+}
+
+
+/*Login form*/
+.form-container{
+    flex-grow: 1;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.box{
+    border: 1px solid #dfdfdf;
+    background: #fff;
+    border-radius: 3px;
+}
+
+.form-content{
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.form-content .logo{
+    text-align: center;
+    height: 50px;
+    width: 175px;
+    margin: 10px auto 20px auto;
+}
+
+.form-content .logo .img{
+    max-width: 100%;
+    
+}
