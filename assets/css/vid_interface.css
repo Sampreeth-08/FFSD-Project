@@ -100,7 +100,7 @@ body {
 
 .dashboard-c {
   width: 25%;
-  height: 100%;
+  height: 95%;
   background: linear-gradient(
     168.68deg,
     rgb(14, 48, 19) 1.12%,
@@ -110,19 +110,12 @@ body {
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  margin-left: 20px;
 }
 
 .call-c {
   width: 50%;
   height: 100%;
-}
-
-.messenger-c {
-  width: 25%;
-  height: 100%;
-  background: #f4f9fd;
-  display: flex;
-  flex-direction: column;
 }
 
 .logo-c {
@@ -387,32 +380,9 @@ body {
   align-items: center;
 }
 
-.new-message-c {
-  position: relative;
-}
-.new-message-input {
-  margin: 0 40px;
-  margin-bottom: 30px;
-  width: calc(100% - 80px);
-  height: 60px;
-  color: #676f7a;
-  font-size: 16px;
-  font-weight: 400;
-  border: 1px solid #d5deeb;
-  border-radius: 15px;
-  box-shadow: 0px 2px 20px 5px rgba(10, 145, 219, 0.05);
-  padding: 0 60px 0 20px;
-  z-index: 2;
-}
-
-.new-message-input:focus {
-  outline: none;
-  color: #676f7a;
-}
-
 .messages-c {
   flex-grow: 1;
-  margin: 40px 30px;
+  /* margin: 40px 30px; */
   overflow-y: scroll;
 }
 
@@ -430,4 +400,172 @@ body {
   );
   border-radius: 8px;
   transition: 0.5s;
+}
+.cgl-live-chat {
+  max-width: 550px;
+  width: 25%;
+  height: 90%;
+  /* margin-right: 10px; */
+  background: #f4f9fd;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+.cgl-live-chat .chat-wrapper {
+  background-color: #fafafa;
+  border: 1px solid #dfdfdf;
+  box-sizing: border-box;
+}
+
+.cgl-live-chat .chat-wrapper .chat-title {
+  padding: 10px;
+  font-family: Hind Madurai;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 28px;
+  color: #000000;
+}
+
+.cgl-live-chat .chat-wrapper .chat-view {
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+  max-height: 400px;
+  overflow-y: auto;
+  justify-content: flex-end;
+}
+
+.cgl-live-chat .chat-wrapper .chat-item {
+  padding: 5px;
+}
+
+.cgl-live-chat .chat-wrapper .chat-view img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.cgl-live-chat .chat-wrapper .chat-view .sender-name a {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 14px;
+  /* identical to box height */
+
+  color: #000000;
+}
+
+.cgl-live-chat .chat-wrapper .chat-view .sender-name a:hover {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.cgl-live-chat .chat-wrapper .chat-view .admin-tag a {
+  background-color: #4368ea !important;
+  color: #ffffff !important;
+  border-radius: 9px;
+  padding: 0 8px;
+}
+
+.cgl-live-chat .chat-wrapper .chat-view .chat-time {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 11px;
+  padding-left: 8px;
+  padding-right: 8px;
+  color: #000000;
+}
+
+.cgl-live-chat .chat-wrapper .chat-view .chat-time i {
+  display: none;
+}
+
+.cgl-live-chat .chat-wrapper .chat-view .chat-pinned {
+  border: 2px solid #dfdfdf;
+  box-sizing: border-box;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #fafafa;
+}
+
+.chat-sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.cgl-live-chat .chat-wrapper .chat-view .chat-pinned .chat-time i {
+  display: inline;
+}
+
+.cgl-live-chat .chat-wrapper .chat-view .chat-text {
+  font-style: normal;
+  font-weight: lighter;
+  font-size: 14px;
+  line-height: 17px;
+  padding: 3px;
+  color: #000000;
+}
+
+.cgl-live-chat .chat-wrapper .chat-message {
+  position: relative;
+  background-color: #fafafa;
+  padding: 6px;
+}
+
+.cgl-live-chat .chat-wrapper .chat-message input {
+  background-color: transparent;
+  border: none !important;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 22px;
+  color: #fafafa;
+  outline: none !important;
+}
+
+.cgl-live-chat .chat-wrapper .chat-message button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+@media (max-width: 450px) {
+  .cgl-live-chat .chat-wrapper .chat-view {
+    max-height: 300px;
+  }
+
+  .cgl-live-chat .chat-wrapper .chat-view img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .cgl-live-chat .chat-wrapper .chat-view .sender-name a {
+    font-size: 10px;
+    line-height: 10px;
+  }
+
+  .cgl-live-chat .chat-wrapper .chat-view .chat-time {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .cgl-live-chat .chat-wrapper .chat-view .chat-text {
+    font-size: 12px;
+    line-height: 12px;
+    padding: 3px;
+  }
+}
+
+.dropdown-btn {
+  background-color: transparent;
+  color: #000000;
+  border: none;
+  outline: none !important;
 }
