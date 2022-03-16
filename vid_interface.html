@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Celestial Watch Party</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/728d3c0089.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/vid_interface.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="nav-wrapper">
@@ -59,7 +62,8 @@
                         <p class="connecting-btn-p"><i class="fa-solid fa-message connecting-btns-icon"></i> Chat</p>
                     </button>
                     <button class="connecting-btn" id="personal-code-video-btn">
-                        <p class="connecting-btn-p"><i class="fa-solid fa-video connecting-btns-icon"></i> Video Chat</p>
+                        <p class="connecting-btn-p"><i class="fa-solid fa-video connecting-btns-icon"></i> Video Chat
+                        </p>
                     </button>
                 </div>
             </div>
@@ -70,7 +74,8 @@
                         <p class="connecting-btn-p"><i class="fa-solid fa-message connecting-btns-icon"></i> Chat</p>
                     </button>
                     <button class="connecting-btn" id="stranger-video-btn">
-                        <p class="connecting-btn-p"><i class="fa-solid fa-video connecting-btns-icon"></i> Video Chat</p>
+                        <p class="connecting-btn-p"><i class="fa-solid fa-video connecting-btns-icon"></i> Video Chat
+                        </p>
                     </button>
                 </div>
             </div>
@@ -126,15 +131,41 @@
                 </div>
             </div>
         </div>
-        <div class="messenger-c">
-            <div class="messages-c" id="messages-c"></div>
-            <div class="new-message-c" id="new-message">
-                <input type="text" class="new-message-input" id="new-message-input" placeholder="Type your message...">
-                <button class="send-message-btn" id="send-message-btn">
-                    <i class="fa-solid fa-paper-plane"></i>
-                </button>
+        <div class="cgl-live-chat">
+            <div class="chat-wrapper">
+                <div class="chat-title">
+                    Live Chat
+                </div>
+                <div class="chat-view">
+                    <div class="chat-item">
+                        <div class="d-flex">
+                            <img src="assets/imgs/2.png" alt="">
+                            <div class="p-1">
+                                <div class="d-flex align-items-end">
+                                    <div class="sender-name"><a href="#">Name</a></div>
+                                    <div class="chat-time">09:54 24/05/21</div>
+                                </div>
+                                <div class="chat-text">
+                                    Hello guys! Join The Live Stream
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-message">
+                <form action="#">
+                    <div class="input-group align-items-center">
+                        <input type="text" class="form-control" placeholder="Type something...">
+                        <div class="input-group-append">
+                            <button class="send-message-btn" type="button" id="button-addon2">
+                                <img src="assets/img/send-btn.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
 </body>
+
 </html>

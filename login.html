@@ -9,16 +9,37 @@
     <script src="https://kit.fontawesome.com/728d3c0089.js" crossorigin="anonymous"></script>    
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        body{
+        /* body{
             background-image: url(assets/imgs/4.jpg);
             background-repeat:no-repeat;
             background-size:cover;
             background-position:center;
+        } */
+        .back-video{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+        @media (min-aspect-ratio: 16/9){
+            .back-video{
+                width: 100%;
+                height: auto;
+            }
+        }
+        @media (max-aspect-ratio: 16/9){
+            .back-video{
+                width: auto;
+                height: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <video autoplay loop muted plays-inline class="back-video">
+            <source src="assets/imgs/back.mp4" type="video/mp4">
+        </video>
         <div class="main-container">
             <div class="main-content">
                 <div class="form-container">
