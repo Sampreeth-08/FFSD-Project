@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celestial</title>
+    <title>Celestial Edit Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/728d3c0089.js" crossorigin="anonymous"></script>
@@ -31,34 +31,31 @@
     <section class="main">
         <div class="wrapper">
             <div class="left-col">
-                <div class="post">
-                    <div class="info">
-                        <div class="user">
-                            <div class="profile-pic"><img src="assets/imgs/dp.jpg" alt=""></div>
-                            <p class="username">User</p>
-                        </div>
-                        <i class="fas fa-plus options"></i>
+                <h3>Update Profile</h3>
+                <form action="">
+                    <div class="mb-3">
+                        <img src="assets/imgs/1.jpg" alt="" class="edit-profile-image">
+                        <input type="file" name="image" class="form-control">
                     </div>
-
-                    <img src="assets/imgs/1.jpg" class="post-image">
-                    <div class="post-content">
-                        <div class="reaction-wrapper">
-                            <i class="icon fas fa-heart"></i>
-                            <i class="icon fas fa-comment"></i>
-                        </div>
-
-                        <p class="likes">420 likes</p>
-                        <p class="description"><span>User</span> This is a description</p>
-                        <p class="post-time">31/02/3045</p>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <p class="form-control">Email</p>
                     </div>
-
-                    <div class="comment-wrapper">
-                        <img src="assets/imgs/dp.jpg" alt="" class="icon">
-                        <input type="text" class="comment-box" placeholder="Add a comment">
-                        <button class="comment-btn">comment</button>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" name="username" id="username" placeholder="username" class="form-control">
                     </div>
-                </div>
+                    <div class="mb-3">
+                        <label for="bio" class="form-label">Bio</label>
+                        <textarea name="bio" id="bio" cols="30" rows="3" class="form-control"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <input name="update_profile_btn" id="username" class="update-profile-btn" value="Update">
+                    </div>
+                </form>
             </div>
+
+
             <div class="right-col">
                 <div class="profile-card">
                     <div class="profile-pic">
