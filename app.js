@@ -8,6 +8,9 @@ const bodyParser = require("body-parser");
 
 const server = app.listen(port, () => console.log("Server listening on port " + port));
 
+app.set("view engine", "ejs");
+app.set("views", "views");
+
 app.use(express.static('public'));
 app.use('/css', express.static(path.join(__dirname, "public/assets/css")))
 app.use('/js', express.static(path.join(__dirname, "public/assets/js")))
@@ -24,5 +27,11 @@ app.use("/login", loginRoute);
 app.use("/signup", signupRoute)
 
 app.get("/", middleware.requireLogin, (req, res, next) => {
-    res.status(200).sendFile(path.join(__dirname + "/views/index.html"));
+    var payload={
+        pageTitle: "Home",
+        userLoggedIn: req.session.user
+    }
+    res.status(200).render("index", payload);
+
+    //res.status(200).render(path.join(__dirname + "/views/index"));
 })

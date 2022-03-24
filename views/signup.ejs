@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         /* body{
-            background: url(assets/imgs/back.mp4);
+            background: url(assets/img/back.mp4);
             background-repeat:no-repeat;
             background-size:cover;
             background-position:center;
@@ -43,26 +43,31 @@
 <body>
     <div class="container">
         <video autoplay loop muted plays-inline class="back-video">
-            <source src="assets/imgs/back.mp4" type="video/mp4">
+            <source src="assets/img/back.mp4" type="video/mp4">
         </video>
         <div class="main-container">
             <div class="main-content">
                 <div class="form-container">
                     <div class="form-content box">
                         <div class="logo">
-                            <img src="assets/imgs/logo.png" class="logo-img" alt="">
+                            <img src="assets/img/logo.png" class="logo-img" alt="">
                         </div>
                         <form class="signup-form" id="signup-form" method="post">
 
-                            <p id="error_message" class="text-center alert-danger"></p>
+                            <p id="error_message" class="text-center alert-danger errorMessage">
+                                <% if(errorMessage){ %> 
+                                    <%= errorMessage %>
+                                <% } %>
+                            </p>
+                            <!-- <p class="errorMessage"><%= errorMessage %></p> -->
                             <div class="form-group">
                                 <div class="login-input">
-                                    <input type="text" name="email" placeholder="Enter email address" required>
+                                    <input type="text" name="email" placeholder="Enter email address" value="email" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="login-input">
-                                    <input type="text" name="username" placeholder="Enter username" required>
+                                    <input type="text" name="username" placeholder="Enter username" value="username" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -87,7 +92,7 @@
                             <hr>
                         </div>
                         <div class="goto">
-                            <p>Already have an account? <a href="login.html">Log In</a></p>
+                            <p>Already have an account? <a href="login">Log In</a></p>
                         </div>
                     </div>
                 </div>
