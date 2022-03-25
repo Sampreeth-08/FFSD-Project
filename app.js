@@ -4,6 +4,7 @@ const port = 3000;
 const middleware = require('./middleware');
 const path = require('path');
 const bodyParser = require("body-parser");
+const mongoose=require('./database');
 
 
 const server = app.listen(port, () => console.log("Server listening on port " + port));
@@ -26,7 +27,7 @@ const signupRoute = require('./routes/signupRoutes');
 app.use("/login", loginRoute);
 app.use("/signup", signupRoute)
 
-app.get("/", middleware.requireLogin, (req, res, next) => {
+app.get("/", (req, res, next) => {
     var payload={
         pageTitle: "Home",
         userLoggedIn: req.session.user
