@@ -23,7 +23,7 @@ const UserSchema=new Schema({
         type: String,
         default: "/img/dp.png"
     }
-});
+}, {timestamps: true});
 
 let User=mongoose.model('User', UserSchema);
 module.exports=User;

@@ -1,0 +1,55 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  title  
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3', crossorigin='anonymous')
+  script(src='https://kit.fontawesome.com/728d3c0089.js', crossorigin='anonymous')
+  link(rel='stylesheet', href='assets/css/style.css')
+nav.navbar
+  .nav-wrapper
+    img.brand-img(src='assets/img/logo.png')
+    form.search-form(action='')
+      input.search-box(type='text', placeholder='search')
+    .nav-items
+      i.icon.fa-solid.fa-house
+      i.icon.fa-solid.fa-plus
+      i.icon.fa-solid.fa-heart
+      a(href='WatchParty.html')
+        i.icon.fa-solid.fa-tv
+      .icon.user-profile
+section.main
+  .wrapper
+    .left-col
+      .post
+        .info
+          .user
+            .profile-pic
+              img(src='assets/img/dp.jpg', alt='')
+            p.username User
+          i.fas.fa-plus.options
+        img.post-image(src='assets/img/1.jpg')
+        .post-content
+          .reaction-wrapper
+            i.icon.fas.fa-heart
+            i.icon.fas.fa-comment
+          p.likes 420 likes
+          p.description
+            span User
+            |  This is a description
+          p.post-time 31/02/3045
+        .comment-wrapper
+          img.icon(src='assets/img/dp.jpg', alt='')
+          input.comment-box(type='text', placeholder='Add a comment')
+          button.comment-btn comment
+    .right-col
+      .profile-card
+        .profile-pic
+          img(src='assets/img/dp.jpg', alt='')
+        div
+          p.username User
+          p.sub-text sub-text
+        button.logout-btn logout
+      p.events Stargazing Events
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js', integrity='sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p', crossorigin='anonymous')
