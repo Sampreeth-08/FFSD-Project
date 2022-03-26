@@ -41,11 +41,11 @@ head
         .form-content.box
           .logo
             img.logo-img(src='assets/img/logo.png', alt='')
-          form#login-form.login-form
+          form#login-form.login-form(method='post' onsubmit="event.preventDefault(); verifyForm();")
             p#error_message.text-center.alert-danger.errorMessage #{errorMessage}
             .form-group
               .login-input
-                input(type='text', name='username', placeholder='Enter username', required='')
+                input(type='text', name='username', placeholder='Enter username or email', required='')
             .form-group
               .login-input
                 input#password(type='password', name='password', placeholder='Enter password', required='')
@@ -64,13 +64,15 @@ script.
   function verifyForm() {
   let password = document.getElementById('password').value;
   let error_message = document.getElementById('error_message');
+  let form=document.getElementById("login-form")
   if (password.length < 6) {
-  error_message.innerHTML = "Password is too short";
-  return false;
+    error_message.innerHTML = "Password is too short";
+    //return false;
   }
-  return true;
+  //return true;
+  form.submit();
   }
   //- document.getElementById('login-form').addEventListener('submit', (e) => {
   //- e.preventDefault();
   //- verifyForm();
-  })
+  //- })

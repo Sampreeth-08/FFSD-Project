@@ -13,7 +13,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 router.get("/", (req, res, next) => {
     res.status(200).render("login")
-    //res.status(200).render(path.join(__dirname, "./../views/login"))
 })
 
 router.post("/", async (req, res, next) => {

@@ -21,7 +21,7 @@ app.use('/img', express.static(path.join(__dirname, "public/assets/img")))
 //app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
-    secret: "rolling thunder",
+    secret: "confidential info",
     resave: true,
     saveUninitialized: false
 }))

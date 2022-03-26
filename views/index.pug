@@ -11,14 +11,17 @@ nav.navbar
   .nav-wrapper
     img.brand-img(src='assets/img/logo.png')
     form.search-form(action='')
-      input.search-box(type='text', placeholder='search')
+        input.search-box(type='text', placeholder='search')
     .nav-items
-      i.icon.fa-solid.fa-house
-      i.icon.fa-solid.fa-plus
-      i.icon.fa-solid.fa-heart
-      a(href='WatchParty.html')
-        i.icon.fa-solid.fa-tv
-      .icon.user-profile
+        a(href="/", style="color: #000")
+            i.icon.fa-solid.fa-house
+        a(href="/discover", style="color: #000")
+            i.icon.fa-solid.fa-plus
+        a(href="/liked", style="color: #000")
+            i.icon.fa-solid.fa-heart
+        a(href="/WatchParty", style="color: #000")
+            i.icon.fa-solid.fa-tv
+        .icon.user-profile
 section.main
   .wrapper
     .left-col
