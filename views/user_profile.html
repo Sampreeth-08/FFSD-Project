@@ -10,6 +10,13 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/728d3c0089.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        function changeText() {
+            var elem = document.getElementById("fButton");
+            if (elem.value == "Follow") elem.value = "Following";
+            else if (elem.value = "Following") elem.value = "Follow";
+        }
+    </script>
 </head>
 
 <body>
@@ -45,7 +52,8 @@
                     </ul>
 
                     <form action="">
-                        <button type="submit" class="follow-btn-user-profile">follow</button>
+                        <input onclick="changeText()" type="button" class="follow-btn-user-profile" value="Follow"
+                            id="fButton"></input>
                     </form>
                 </div>
                 <div class="profile-bio" style="text-align:center; width: 100%;">
