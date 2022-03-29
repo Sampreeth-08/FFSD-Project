@@ -1,4 +1,4 @@
-<%- include('partials/header') %> 
+<%- include('partials/header') %>
 
 
     <header class="profile-header">
@@ -9,7 +9,9 @@
                     <img src="/img/dp.jpg" alt="">
                 </div>
                 <div class="profile-user-settings">
-                    <h1 class="profile-user-name"><%=(typeof username != "undefined" ? username : "")%></h1>
+                    <h1 class="profile-user-name">
+                        <%=(typeof username !="undefined" ? username : "" )%>
+                    </h1>
                     <button class="profile-btn profile-edit-btn">Edit Profile</button>
                     <button class="profile-btn profile-settings-btn" aria-label="profile-settings">
                         <i class="fas fa-cog"></i>
@@ -17,13 +19,23 @@
                 </div>
                 <div class="profile-stats">
                     <ul>
-                        <li><span class="profile-stat-count"><%=(typeof posts != "undefined" ? posts : "")%></span> posts</li>
-                        <li><span class="profile-stat-count"><%=(typeof followers != "undefined" ? followers : "")%></span> followers</li>
-                        <li><span class="profile-stat-count"><%=(typeof following != "undefined" ? following : "")%></span> following</li>
+                        <li><span class="profile-stat-count">
+                                <%=(typeof posts !="undefined" ? posts : "" )%>
+                            </span> posts</li>
+                        <li><span class="profile-stat-count">
+                                <%=(typeof followers !="undefined" ? followers : "" )%>
+                            </span> followers</li>
+                        <li><span class="profile-stat-count">
+                                <%=(typeof following !="undefined" ? following : "" )%>
+                            </span> following</li>
                     </ul>
                 </div>
                 <div class="profile-bio">
-                    <p><span class="profile-real-name"><%=(typeof username != "undefined" ? username : "")%></span><%=(typeof bio != "undefined" ? bio : "")%></p>
+                    <p><span class="profile-real-name">
+                            <%=(typeof username !="undefined" ? username : "" )%>
+                        </span>
+                        <%=(typeof bio !="undefined" ? bio : "" )%>
+                    </p>
                 </div>
             </div>
         </div>
@@ -74,6 +86,6 @@
             </div>
         </div>
     </main>
-</body>
+    </body>
 
-</html>
+    </html>

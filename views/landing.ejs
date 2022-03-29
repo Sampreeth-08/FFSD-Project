@@ -44,16 +44,19 @@
                     Login
                     <span class="underline"></span>
                 </button>
-                <form class="form form-login" method="post" action="/login">
+                <form class="form form-login" id="form-login" method="post" action="/login">
+                    <p id="error_message1" class="text-center alert-danger"></p>
                     <fieldset>
                         <legend>Please, enter your email and password for login.</legend>
                         <div class="input-block">
                             <label for="login-username">E-mail</label>
-                            <input id="login-username" type="text" placeholder="Enter your username" name="login_username" required>
+                            <input id="login-username" type="text" placeholder="Enter your username"
+                                name="login_username" required>
                         </div>
                         <div class="input-block">
                             <label for="login-password">Password</label>
-                            <input id="login-password" type="password" placeholder="Enter your password" name="login_password" required>
+                            <input id="login-password" type="password" placeholder="Enter your password"
+                                name="login_password" required>
                         </div>
                     </fieldset>
                     <button type="submit" class="btn-login">Login</button>
@@ -66,12 +69,14 @@
                     Sign Up
                     <span class="underline"></span>
                 </button>
-                <form class="form form-signup" method="post" action="/signup">
+                <form class="form form-signup" id="form-signup" method="post" action="/signup">
+                    <p id="error_message2" class="text-center alert-danger"></p>
                     <fieldset>
                         <legend>Please, enter your email, password and password confirmation for sign up.</legend>
                         <div class="input-block">
                             <label for="signup-username">Username</label>
-                            <input id="signup-email" type="text" placeholder="Enter your username" name="username" required>
+                            <input id="signup-username" type="text" placeholder="Enter your username" name="username"
+                                required>
                         </div>
                         <div class="input-block">
                             <label for="signup-email">E-mail</label>
@@ -79,7 +84,8 @@
                         </div>
                         <div class="input-block">
                             <label for="signup-password">Password</label>
-                            <input id="signup-password" type="password" placeholder="Enter your password" name="password" required>
+                            <input id="signup-password" type="password" placeholder="Enter your password"
+                                name="password" required>
                         </div>
                     </fieldset>
                     <button type="submit" class="btn-signup">Sign Up</button>
@@ -95,6 +101,51 @@
                 switchers.forEach(item => item.parentElement.classList.remove('is-active'))
                 this.parentElement.classList.add('is-active')
             })
+        })
+        let form = document.getElementById('form-login')
+        function verifyForm1() {
+            let email = document.getElementById("login-username").value;
+            let regemail = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+            let error_message = document.getElementById('error_message1');
+            let str = ``;
+            if (!regemail.test(email)) {
+                str += `Invalid Email Address`
+            }
+            if (str !== ``) {
+                error_message.innerHTML = str
+                return false
+            }
+            return true;
+        }
+        // function verifyForm2() {
+        //     let email = document.getElementById("signup-email").value;
+        //     let regemail = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+        //     let password = document.getElementById('signup-password').value;
+        //     let error_message = document.getElementById('error_message2');
+        //     let user = document.getElementById("signup-username").value;
+        //     let reguser = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
+        //     let str = ``;
+        //     if (!reguser.test(user)) {
+        //         str += `Username should only contain (alphabet digits _ .) ,where consecutive dot's are not allowed and username is not allowed to start or end with .<br>`
+        //     }
+        //     if (!regemail.test(email)) {
+        //         str += `Invalid Email Address<br>`
+        //     }
+        //     if (password.length < 6) {
+        //         str += `Password is too short<br>`
+        //     }
+        //     if (str !== ``) {
+        //         error_message.innerHTML = str
+        //         return false
+        //     }
+        //     return true;
+        // }
+
+        document.getElementById('form-login').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (verifyForm1()) {
+                form.submit();
+            }
         })
     </script>
 </body>

@@ -10,33 +10,33 @@ const saltrounds = 10;
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const req = require("express/lib/request");
-JWT_SECRET=process.env.JWT_SECRET.toString()
+JWT_SECRET = process.env.JWT_SECRET.toString()
 const session = require('express-session');
 const requiredLogin = require("./middleware/requiredLogin");
 
-router.get("/",function(req,res){
+router.get("/", function (req, res) {
     res.render("landing")
 })
-  
-router.get("/index", function(req,res){
+
+router.get("/index", function (req, res) {
     console.log(req.headers.cookie)
-     res.render("index",{title:req.session.user.username})
+    res.render("index", { title: req.session.user.username })
 })
-  
-  
-  
+
+
+
 //   router.get("/404",function(req,res){
 //     console.log(req.session.user.username)
 //     res.render("404");
 //   });
-  
-  
-  
-  
-  
 
-  
-  
+
+
+
+
+
+
+
 
 
 
