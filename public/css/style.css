@@ -358,12 +358,9 @@ body {
   max-width: 100%;
 }
 
-
-
 .form-group {
   margin: 0 40px 6px;
 }
-
 
 .btn-group {
   padding: 8px 40px;
@@ -767,6 +764,5 @@ body {
   margin: 25px auto;
   padding: 0 2rem;
 }
-
 
 /*Login*/

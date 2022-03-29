@@ -1,20 +1,20 @@
-const mongoose=require('mongoose');
+const mongoose = require('mongoose');
 
-class Database{
+class Database {
 
-    constructor(){
+    constructor() {
         this.connect();
     }
 
-    connect(){
+    connect() {
         mongoose.connect("mongodb+srv://admin:celestial@celestialcluster.tptmt.mongodb.net/CelestialDB?retryWrites=true&w=majority")
-        .then(()=>{
-            console.log("Database connection successful")
-        })
-        .catch((err)=>{
-            console.log("Database connection error"+err)
-        })
+            .then(() => {
+                console.log("Database connection successful")
+            })
+            .catch((err) => {
+                console.log("Database connection error" + err)
+            })
     }
 }
 
-module.exports=new Database();
+module.exports = new Database();
