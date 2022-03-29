@@ -5,12 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celestial-SignUp</title>
+    <title>Celestial-login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/728d3c0089.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/style.css">
     <style>
+        /* body{
+            background-image: url(/img/4.jpg);
+            background-repeat:no-repeat;
+            background-size:cover;
+            background-position:center;
+        } */
         .back-video {
             position: absolute;
             right: 0;
@@ -46,16 +52,12 @@
                         <div class="logo">
                             <img src="/img/logo.png" class="logo-img" alt="">
                         </div>
-                        <form class="signup-form" id="signup-form" method="post">
-                                <p id="error_message" class="text-center alert-danger errorMessage"></p>
+                        <form class="login-form" id="login-form" method="post" action="/login">
+                            <p id="error_message" class="text-center alert-danger"></p>
                             <div class="form-group">
                                 <div class="login-input">
-                                    <input type="text" name="email" placeholder="Enter email address" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="login-input">
-                                    <input type="text" name="username" placeholder="Enter username" required>
+                                    <input type="text" name="email" id="email" placeholder="Enter email address"
+                                        required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -64,14 +66,8 @@
                                         required>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="login-input">
-                                    <input type="password" name="password_confirm" id="confirm_password"
-                                        placeholder="Confirm password" required>
-                                </div>
-                            </div>
                             <div class="btn-group">
-                                <button class="login-btn" id="signup_btn" type="submit">Sign Up</button>
+                                <button class="login-btn" id="login_btn" type="submit">Log In</button>
                             </div>
                         </form>
                         <div class="or">
@@ -80,7 +76,7 @@
                             <hr>
                         </div>
                         <div class="goto">
-                            <p>Already have an account? <a href="login">Log In</a></p>
+                            <p>Don't have an account? <a href="signup">Sign Up</a></p>
                         </div>
                     </div>
                 </div>
@@ -93,22 +89,25 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <script>
+        let form = document.getElementById('login-form')
         function verifyForm() {
-            let password = document.getElementById('password').value;
-            let confirm_password = document.getElementById('confirm_password').value;
+            let email = document.getElementById("email").value;
+            let regemail = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
             let error_message = document.getElementById('error_message');
-            if (password.length < 6) {
-                error_message.innerHTML = "Password is too short";
-                return false;
+            let str = ``;
+            if (!regemail.test(email)) {
+                str += `Invalid Email Address<br>`
             }
-            if (password !== confirm_password) {
-                error_message.innerHTML = "Passwords don't match";
-                return false;
+            if (str !== ``) {
+                //error_message.innerHTML = str
+                alert(str);
+                //return false
             }
-            return true;
+            //return true;
+            form.submit();
         }
 
-        document.getElementById('signup-form').addEventListener('submit', (e) => {
+        document.getElementById('login-form').addEventListener('submit', (e) => {
             e.preventDefault();
             verifyForm();
         })

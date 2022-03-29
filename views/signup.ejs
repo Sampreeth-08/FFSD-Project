@@ -46,7 +46,7 @@
                         <div class="logo">
                             <img src="/img/logo.png" class="logo-img" alt="">
                         </div>
-                        <form class="signup-form" id="signup-form" method="post">
+                        <form class="signup-form" id="signup-form" method="post" action="/signup">
                                 <p id="error_message" class="text-center alert-danger errorMessage"></p>
                             <div class="form-group">
                                 <div class="login-input">
@@ -94,20 +94,36 @@
         crossorigin="anonymous"></script>
     <script>
         function verifyForm() {
-            let password = document.getElementById('password').value;
-            let confirm_password = document.getElementById('confirm_password').value;
             let error_message = document.getElementById('error_message');
-            if (password.length < 6) {
-                error_message.innerHTML = "Password is too short";
-                return false;
+            let user = document.getElementById("username").value;
+            let reguser = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/igm;
+            let email = document.getElementById("email").value;
+            let regemail = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+            let str = ``
+            let password = document.getElementById("password").value;
+            let repassword = /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$/;
+            let confirm_password = document.getElementById("confirm_password").value;
+            if (!reguser.test(user)) {
+                str += `Username should only contain (alphabet digits _ .) ,where consecutive dot's are not allowed and username is not allowed to start or end with .<br>`
+
+            }
+            if (!regemail.test(email)) {
+                str += `Invalid Email Address`
+            }
+            if (!repassword.test(password)) {
+                str += `Password should contain two uppercase letters,one special letter,two digits,three lowercase letters and password should be greater than 8<br>`
             }
             if (password !== confirm_password) {
-                error_message.innerHTML = "Passwords don't match";
-                return false;
+                str += `Passwords Doesn't Match<br>`
             }
-            return true;
+            if (str !== ``) {
+                //error_message.innerHTML = str
+                alert(str);
+                //return false
+            }
+            //return true;
+            form.submit();
         }
-
         document.getElementById('signup-form').addEventListener('submit', (e) => {
             e.preventDefault();
             verifyForm();
