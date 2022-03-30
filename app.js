@@ -52,13 +52,13 @@ app.use(require('./routes/signupRoutes'))
 app.use("/logout", require('./routes/logout'))
 app.use("/profile", requiredLogin, require('./routes/profile'))
 app.use("/camera", requiredLogin, require('./routes/camera'))
-// app.use("/discover",requiredLogin,require('./routes/discover'))
-// app.use("/single_post",requiredLogin,require('./routes/single_post'))
+app.use("/discover",requiredLogin,require('./routes/discover'))
+app.use("/single_post",requiredLogin,require('./routes/single_post'))
 app.use("/edit_profile", requiredLogin, require('./routes/edit_profile'))
-// app.use("/liked_posts",requiredLogin,require('./routes/liked_posts'))
-// app.use("/profile",requiredLogin,require('./routes/profile'))
-// app.use("/search",requiredLogin,require('./routes/search'))
-
+app.use("/liked_posts",requiredLogin,require('./routes/liked_posts'))
+app.use("/profile",requiredLogin,require('./routes/profile'))
+app.use("/search",requiredLogin,require('./routes/search'))
+app.use("/user_profile",requiredLogin,require('./routes/user_profile'))
 
 
 app.listen(3000, () => {

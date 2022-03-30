@@ -1,0 +1,79 @@
+<%- include('partials/header') %>
+
+
+    <header class="profile-header">
+        <div class="profile-container">
+            <div class="profile">
+                <div class="profile-image">
+                    <img src="/img/dp.jpg" alt="">
+                </div>
+                <div class="profile-user-settings" style="width: 35%; text-align: center;">
+                    <h1 class="profile-user-name">User</h1>
+                </div>
+                <div class="profile-stats">
+                    <ul>
+                        <li><span class="profile-stat-count">88</span> posts</li>
+                        <li><span class="profile-stat-count">88</span> followers</li>
+                        <li><span class="profile-stat-count">88</span> following</li>
+                    </ul>
+
+                    <form action="">
+                        <input onclick="changeText()" type="button" class="follow-btn-user-profile" value="Follow"
+                            id="fButton"></input>
+                    </form>
+                </div>
+                <div class="profile-bio" style="text-align:center; width: 100%;">
+                    <p><span class="profile-real-name">Name</span> Set your Heart Ablaze!</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="profile-container">
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="/img/4.jpg" class="gallery-image" alt="">
+                    <div class="gallery-item-info">
+                        <ul>
+                            <li class="gallery-item-likes"><span class="hide-gallery">Likes:</span>
+                                <i class="fas fa-heart"></i>
+                            </li>
+                            <li class="gallery-item-comments"><span class="hide-gallery">Comments:</span>
+                                <i class="fas fa-comment"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/img/5.jpeg" class="gallery-image" alt="">
+                    <div class="gallery-item-info">
+                        <ul>
+                            <li class="gallery-item-likes"><span class="hide-gallery">Likes:</span>
+                                <i class="fas fa-heart"></i>
+                            </li>
+                            <li class="gallery-item-comments"><span class="hide-gallery">Comments:</span>
+                                <i class="fas fa-comment"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/img/6.jpeg" class="gallery-image" alt="">
+                    <div class="gallery-item-info">
+                        <ul>
+                            <li class="gallery-item-likes"><span class="hide-gallery">56</span>
+                                <i class="fas fa-heart"></i>
+                            </li>
+                            <li class="gallery-item-comments"><span class="hide-gallery">33</span>
+                                <i class="fas fa-comment"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
