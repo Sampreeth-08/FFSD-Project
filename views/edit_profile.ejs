@@ -7,11 +7,11 @@
 
                 <p class="text-center"></p>
 
-                <form action="/edit_profile" method="put">
+                <form id="edit-form" action="/edit_profile" method="put">
                     <p id="error_message" class="text-center alert-danger"></p>
                     <div class="mb-3">
                         <img src="/img/1.jpg" alt="" class="edit-profile-image">
-                        <input type="file" name="image" class="form-control">
+                        <input type="file" name="image" class="form-control" accept="image/*">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
@@ -42,27 +42,25 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <script>
-        // const update = document.getElementById('update');
-        // update.addEventListener('click', function () {
-        //     console.log(document.getElementById('email').value);
-        //     fetch('/update', {
-        //         method: 'put',
-        //         headers: { 'Content-Type': 'application/json' },
-        //         body: JSON.stringify({
-        //             email: document.getElementById('email').value,
-        //             username: document.getElementById('username').value,
-        //             bio: document.getElementById('bio').value,
-        //             id: update.baseURI.split('/')[4].split('?')[0]
-        //         })
-        //     }).then(res => {
-        //         if (res.ok) window.location.href = 'http://localhost:3000/profile'
-        //     }).then(response => {
-        //         console.log(response)
-        //     })
-        // })
+        const update = document.getElementById('edit-form');
+        update.addEventListener('submit', function () {
+            console.log(document.getElementById('email').value);
+            fetch('/update', {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: document.getElementById('email').value,
+                    username: document.getElementById('username').value,
+                    bio: document.getElementById('bio').value,
+                })
+            }).then(res => {
+                if (res.ok) window.location.href = 'http://localhost:3000/profile'
+            }).then(response => {
+                console.log(response)
+            })
+        })
 
         function verifyForm() {
-            alert('Hello')
             let error_message = document.getElementById('error_message');
             let user = document.getElementById("username").value;
             let reguser = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/igm;
@@ -86,9 +84,11 @@
             return true;
         }
 
-        document.getElementById('update').addEventListener('click', (e) => {
+        document.getElementById('edit-form').addEventListener('submit', (e) => {
             e.preventDefault();
-            verifyForm();
+            if (verifyForm()) {
+                document.getElementById("edit-form").submit();
+            }
         })
     </script>
     </body>

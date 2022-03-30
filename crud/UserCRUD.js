@@ -5,9 +5,9 @@ const router = express.Router();
 const Post = mongoose.model("Post")
 const requiredLogin = require("../middleware/requiredLogin");
 
-router.put("/update", (req, res) => {
+router.post("/update", (req, res) => {
   // console.log("Hello");
-  // alert("Hello");
+  alert("Hello");
   User.updateOne(
     { email: req.body.email },
     {
