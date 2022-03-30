@@ -41,8 +41,9 @@ app.use(cors({
 }))
 app.use(session({
   secret:"Confidential",
+  cookie: {maxAge: 900000},
   resave: true,
-    saveUninitialized: false
+  saveUninitialized: false
 }))
 
 const req = require('express/lib/request');

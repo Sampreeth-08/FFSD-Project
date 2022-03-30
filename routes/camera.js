@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 router.get("/",(req,res)=>{
     console.log(req.session.user.username)
     User.find({_id:req.params.UserId}, function(err, post){
-      console.log(post)
+      //console.log(post)
       res.render("camera", {
         title:req.session.user.username,
         username:req.session.user.username
@@ -42,15 +42,20 @@ router.post("/",(req,res)=>{
             hashtags: req.body.hashtags,
             likes: 0,
             profile_image: req.session.user.profilePic,
+            image: String(req.body.image)
         });
 
         newPost.save(function(err){
             if (!err){
-                res.render("camera", {successMsg: "Post created successfully"});
+                res.render("camera", {
+                    successMsg: "Post created successfully",
+                    image: req.body.image
+                });
                 console.log("Post created successfully!!")
               }
               else{
-                  console.log("Error occurred!!")
+                res.render("camera", {errorMsg: "Caption/hashtag is too long"});
+                console.log("Error occurred!!")
                 console.log(err);
               }
         });

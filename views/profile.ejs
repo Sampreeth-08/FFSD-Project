@@ -11,9 +11,17 @@
                 <div class="profile-user-settings">
                     <h1 class="profile-user-name"><%=(typeof username != "undefined" ? username : "")%></h1>
                     <button class="profile-btn profile-edit-btn">Edit Profile</button>
-                    <button class="profile-btn profile-settings-btn" aria-label="profile-settings">
+                    <button class="profile-btn profile-settings-btn" id="options_btn" aria-label="profile-settings">
                         <i class="fas fa-cog"></i>
                     </button>
+                    <div class="popup" id="popup">
+                        <div class="popup-window">
+                            <span class="close-popup" id="close_popup">&times;</span>
+                            <a href="edit_profile">Edit profile</a>
+                            <a href="camera">Create post</a>
+                            <a href="logout">Logout</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="profile-stats">
                     <ul>
@@ -74,6 +82,33 @@
             </div>
         </div>
     </main>
+
+    <script>
+
+
+        let popupWindow = document.getElementById('popup');
+        let optionsBtn = document.getElementById('options_btn');
+        let closeWindow = document.getElementById('close_popup');
+
+
+      optionsBtn.addEventListener("click",(e)=>{
+           e.preventDefault();
+           popupWindow.style.display = "block";
+      })         
+
+      closeWindow.addEventListener("click",(e)=>{
+          e.preventDefault();
+          popupWindow.style.display = "none";
+      })
+
+      window.addEventListener("click",(e)=>{
+          if(e.target == popupWindow){
+              popupWindow.style.display = "none";
+          }
+      })
+
+
+  </script>
 </body>
 
 </html>

@@ -1,9 +1,17 @@
 <%- include('partials/header') %> 
 
     <div class="camera-container">
+        <p class="text-center mt-4 alert-success"><%=(typeof successMsg != "undefined" ? successMsg : "")%></p>
+        <p class="text-center mt-4 alert-danger"><%=(typeof errorMsg != "undefined" ? errorMsg : "")%></p>
         <div class="camera">
             <div class="camera-image">
-                <img src="/img/4.jpg" alt="">
+                <% if(typeof image != "undefined" ? image : "") {%> 
+                    <img style="width:400px; height:400px;" src="/img/<%=(typeof image != "undefined" ? image : "")%>" alt="">
+                <% } else{ %> 
+                    <img style="width:400px; height:400px;" src="/img/4.jpg" alt="">
+                <% } %> 
+
+                <!-- <img src="/img/4.jpg" alt=""> -->
                 <form action="" class="camera-form" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="file" id="image" name="image" class="form-control"required>

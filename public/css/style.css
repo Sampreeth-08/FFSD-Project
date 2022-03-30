@@ -768,5 +768,51 @@ body {
   padding: 0 2rem;
 }
 
+/*Pop up*/
+.popup{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgb(0,0,0);
+  background: rgba(0,0,0,0.4);
 
-/*Login*/
+}
+
+.popup-window{
+  background: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+}
+
+.close-popup{
+  color:#aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+ 
+}
+
+
+.close-popup:hover, .close-popup:focus{
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.popup-window a{
+  text-decoration: none;
+  color: rgb(60,2,78);
+  font-size: 16px;
+  background: none;
+  display: block;
+  margin: 5px 2px;
+  padding: 5px;
+
+}
