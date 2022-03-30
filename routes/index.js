@@ -7,9 +7,9 @@ const mongoose = require("mongoose")
 const User = mongoose.model("User");
 
 router.get("/", (req, res) => {
-    res.render("user_profile", {
-        title: "User Profile",
-        // username: req.session.user.username,
+    res.render("index", {
+        title: "Index",
+        username: req.session.user.username,
     })
 })
 

@@ -6,8 +6,8 @@ const Post = mongoose.model("Post")
 const requiredLogin = require("../middleware/requiredLogin");
 
 router.put("/update", (req, res) => {
-  console.log("Hello");
-  alert("Hello");
+  // console.log("Hello");
+  // alert("Hello");
   User.updateOne(
     { email: req.body.email },
     {

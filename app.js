@@ -58,6 +58,7 @@ app.use("/edit_profile", requiredLogin, require('./routes/edit_profile'))
 app.use("/liked_posts",requiredLogin,require('./routes/liked_posts'))
 app.use("/profile",requiredLogin,require('./routes/profile'))
 app.use("/search",requiredLogin,require('./routes/search'))
+app.use("/index",requiredLogin,require('./routes/index'))
 app.use("/user_profile",requiredLogin,require('./routes/user_profile'))
 
 
