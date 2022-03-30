@@ -1,8 +1,8 @@
-const mongoose=require('mongoose');
+const mongoose = require('mongoose');
 
-const Schema=mongoose.Schema;
+const Schema = mongoose.Schema;
 
-const UserSchema=new Schema({
+const UserSchema = new Schema({
     username: {
         type: String,
         required: true,
@@ -39,7 +39,7 @@ const UserSchema=new Schema({
         type: String,
         default: "Astronomy is the best"
     }
-}, {timestamps: true});
+}, { timestamps: true });
 
-let User=mongoose.model('User', UserSchema);
-module.exports=User;
+let User = mongoose.model('User', UserSchema);
+module.exports = User;

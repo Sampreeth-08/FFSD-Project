@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const mongoose = require("mongoose")
 const User = mongoose.model("User");
 
-router.get("/", (req, res)=>{
+router.get("/", (req, res) => {
     res.render("profile", {
         title: "Profile",
         username: req.session.user.username,
