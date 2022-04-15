@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {ObjectId}=mongoose.Schema.Types
+const { ObjectId } = mongoose.Schema.Types
 //const { required } = require('nodemon/lib/config');
 
 const Schema = mongoose.Schema;
@@ -10,7 +10,7 @@ const Schema = mongoose.Schema;
 //     pinned: Boolean
 // }, { timestamps: true });
 
-const PostSchema=new Schema({
+const PostSchema = new Schema({
     likes: {
         type: Number,
         default: 0
@@ -27,7 +27,7 @@ const PostSchema=new Schema({
         type: String,
         required: true
     },
-    postedBy:{
+    postedBy: {
         type: ObjectId,
         ref: "User"
     },
@@ -39,7 +39,7 @@ const PostSchema=new Schema({
         type: String,
         required: true
     }
-}, {timestamps: true});
+}, { timestamps: true });
 
 let Post = mongoose.model('Post', PostSchema);
 module.exports = Post;

@@ -1,31 +1,39 @@
-<%- include('partials/header') %> 
+<%- include('partials/header') %>
 
     <div class="camera-container">
-        <p class="text-center mt-4 alert-success"><%=(typeof successMsg != "undefined" ? successMsg : "")%></p>
-        <p class="text-center mt-4 alert-danger"><%=(typeof errorMsg != "undefined" ? errorMsg : "")%></p>
+        <p class="text-center mt-4 alert-success">
+            <%=(typeof successMsg !="undefined" ? successMsg : "" )%>
+        </p>
+        <p class="text-center mt-4 alert-danger">
+            <%=(typeof errorMsg !="undefined" ? errorMsg : "" )%>
+        </p>
         <div class="camera">
             <div class="camera-image">
-                <% if(typeof image != "undefined" ? image : "") {%> 
-                    <img style="width:400px; height:400px;" src="/img/<%=(typeof image != "undefined" ? image : "")%>" alt="">
-                <% } else{ %> 
-                    <img style="width:400px; height:400px;" src="/img/4.jpg" alt="">
-                <% } %> 
+                <% if(typeof image !="undefined" ? image : "" ) {%>
+                    <img style="width:400px; height:400px;" src="/img/<%=(typeof image != " undefined" ? image : "" )%>"
+                    alt="">
+                    <% } else{ %>
+                        <img style="width:400px; height:400px;" src="/img/4.jpg" alt="">
+                        <% } %>
 
-                <!-- <img src="/img/4.jpg" alt=""> -->
-                <form action="" class="camera-form" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <input type="file" id="image" name="image" class="form-control"required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="caption" name="caption" class="form-control" placeholder="type caption..." required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="hashtags" name="hashtags" class="form-control" placeholder="type hashtags..." required>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" id="post" name="upload_image_btn" class="upload-btn">Post</button>
-                    </div>
-                </form>
+                            <!-- <img src="/img/4.jpg" alt=""> -->
+                            <form action="" class="camera-form" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <input type="file" id="image" name="image" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="caption" name="caption" class="form-control"
+                                        placeholder="type caption..." required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="hashtags" name="hashtags" class="form-control"
+                                        placeholder="type hashtags..." required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" id="post" name="upload_image_btn"
+                                        class="upload-btn">Post</button>
+                                </div>
+                            </form>
             </div>
         </div>
     </div>
@@ -34,24 +42,24 @@
         crossorigin="anonymous"></script>
 
     <script>
-        const update=document.getElementById('post');
-        update.addEventListener('click', function(){
+        const update = document.getElementById('post');
+        update.addEventListener('click', function () {
             fetch('https://localhost:3000/camera', {
                 method: 'post',
-                headers:{'Content-Type':'application/json'},
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     image: document.getElementById('image').value,
                     caption: document.getElementById('caption').value,
                     hashtags: document.getElementById('hashtags').value,
                     //id:update.baseURI.split('/')[4].split('?')[0]
                 })
-            }).then(res=>{
-                if(res.ok) window.location.href='http://localhost:3000/camera'
-            }).then(response=>{
+            }).then(res => {
+                if (res.ok) window.location.href = 'http://localhost:3000/camera'
+            }).then(response => {
                 console.log(response)
             })
         })
     </script>
-</body>
+    </body>
 
-</html>
+    </html>

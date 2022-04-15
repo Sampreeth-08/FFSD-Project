@@ -7,42 +7,42 @@ const mongoose = require("mongoose")
 const User = mongoose.model("User");
 const Post = mongoose.model("Post");
 const validator = require('validator')
-const requireLogin=require('../middleware/requiredLogin')
+const requireLogin = require('../middleware/requiredLogin')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-router.get("/",(req,res)=>{
-    console.log(req.session.user.username)
-    User.find({_id:req.params.UserId}, function(err, post){
-      //console.log(post)
-      res.render("camera", {
-        title:req.session.user.username,
-        username:req.session.user.username
-      });
+router.get("/", (req, res) => {
+  console.log(req.session.user.username)
+  User.find({ _id: req.params.UserId }, function (err, post) {
+    //console.log(post)
+    res.render("camera", {
+      title: req.session.user.username,
+      username: req.session.user.username
     });
-  })
+  });
+})
 
-router.get('/allpost',(req,res)=>{
+router.get('/allpost', (req, res) => {
   Post.find()
-  .populate("postedBy","_id name")
-  .then(posts=>{
-    res.json({posts})
-  })
-  .catch(err=>{
-    console.log(err);
-  })
+    .populate("postedBy", "_id name")
+    .then(posts => {
+      res.json({ posts })
+    })
+    .catch(err => {
+      console.log(err);
+    })
 })
 
 
-router.get('/mypost',requireLogin,(req,res)=>{
-  Post.find({postedBy:req.user._id})
-  .populate("PostedBy", "_id name")
-  .then(mypost=>{
-    res.json(mypost)
-  })
-  .catch(err=>{
-    console.log(err);
-  })
+router.get('/mypost', requireLogin, (req, res) => {
+  Post.find({ postedBy: req.user._id })
+    .populate("PostedBy", "_id name")
+    .then(mypost => {
+      res.json(mypost)
+    })
+    .catch(err => {
+      console.log(err);
+    })
 })
 
 
@@ -51,24 +51,24 @@ router.get('/mypost',requireLogin,(req,res)=>{
 
 
 
-router.post('/camera',requireLogin,(req,res)=>{
-  const {title,body}=req.body;
-  if(!title || !body){
-    return res.status(422).json({error:"Please add all the fields"})
+router.post('/camera', requireLogin, (req, res) => {
+  const { title, body } = req.body;
+  if (!title || !body) {
+    return res.status(422).json({ error: "Please add all the fields" })
   }
-  req.user.password=undefined
-  const post=new this.post({
+  req.user.password = undefined
+  const post = new this.post({
     title,
     body,
-    postedBy:req.user
+    postedBy: req.user
   })
   post.save()
-  .then(result=>{
-    res.json({post:result})
-  })
-  .catch(err=>{
-    console.log(err);
-  })
+    .then(result => {
+      res.json({ post: result })
+    })
+    .catch(err => {
+      console.log(err);
+    })
 })
 
 
@@ -82,52 +82,52 @@ router.post('/camera',requireLogin,(req,res)=>{
 
 
 
-router.post("/",(req,res)=>{
-    const { image, caption, hashtags } = req.body;
-    const errors = [];
+router.post("/", (req, res) => {
+  const { image, caption, hashtags } = req.body;
+  const errors = [];
 
-    if(String(caption).length>200 || String(hashtags).length>200){
-        errors.push({
-            param: 'username',
-            msg: 'Caption/hashtag is too long'
-        });
-    }
-
-    if(errors.length>0){
-        res.json({errors});
-    }
-    else{
-        const newPost =  new Post({
-            username: req.session.user.username,
-            caption: req.body.caption,
-            hashtags: req.body.hashtags,
-            likes: 0,
-            profile_image: req.session.user.profilePic,
-            image: String(req.body.image)
-        });
-
-        newPost.save(function(err){
-            if (!err){
-                res.render("camera", {
-                    successMsg: "Post created successfully",
-                    image: req.body.image
-                });
-                console.log("Post created successfully!!")
-              }
-              else{
-                res.render("camera", {errorMsg: "Caption/hashtag is too long"});
-                console.log("Error occurred!!")
-                console.log(err);
-              }
-        });
-    }
-
-
-  
-  
-    
-    
-    
+  if (String(caption).length > 200 || String(hashtags).length > 200) {
+    errors.push({
+      param: 'username',
+      msg: 'Caption/hashtag is too long'
     });
+  }
+
+  if (errors.length > 0) {
+    res.json({ errors });
+  }
+  else {
+    const newPost = new Post({
+      username: req.session.user.username,
+      caption: req.body.caption,
+      hashtags: req.body.hashtags,
+      likes: 0,
+      profile_image: req.session.user.profilePic,
+      image: String(req.body.image)
+    });
+
+    newPost.save(function (err) {
+      if (!err) {
+        res.render("camera", {
+          successMsg: "Post created successfully",
+          image: req.body.image
+        });
+        console.log("Post created successfully!!")
+      }
+      else {
+        res.render("camera", { errorMsg: "Caption/hashtag is too long" });
+        console.log("Error occurred!!")
+        console.log(err);
+      }
+    });
+  }
+
+
+
+
+
+
+
+});
 
 module.exports = router

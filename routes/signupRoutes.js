@@ -10,39 +10,39 @@ const saltrounds = 10
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-router.get('/',(req,res)=>{
+router.get('/', (req, res) => {
   res.send("Celestial")
 })
 
-router.post('/signup',(req,res)=>{
+router.post('/signup', (req, res) => {
   const { username, email, password } = req.body;
-  if(!email || !password || !username){
-    return res.status(422).json({error: "Please add all the fields"})
+  if (!email || !password || !username) {
+    return res.status(422).json({ error: "Please add all the fields" })
   }
-  User.findOne({email:email})
-  .then((savedUser)=>{
-    if(savedUser){
-      return res.status(422).json({error: "User already exists with that email"})
-    }
-    bcrypt.hash(password,12)
-    .then(hashedpassword=>{
-      const user=new User({
-        username,
-        email,
-        password:hashedpassword
-      })
-      user.save()
-      .then(user=>{
-        res.json({message: "Saved successfully"})
-      })
-      .catch(err=>{
-        console.log(err)
-      })
+  User.findOne({ email: email })
+    .then((savedUser) => {
+      if (savedUser) {
+        return res.status(422).json({ error: "User already exists with that email" })
+      }
+      bcrypt.hash(password, 12)
+        .then(hashedpassword => {
+          const user = new User({
+            username,
+            email,
+            password: hashedpassword
+          })
+          user.save()
+            .then(user => {
+              res.json({ message: "Saved successfully" })
+            })
+            .catch(err => {
+              console.log(err)
+            })
+        })
     })
-  })
-  .catch(err=>{
-    console.log(err)
-  })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 // router.post("/signup", (req, res) => {
