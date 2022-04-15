@@ -11,7 +11,7 @@ const users = {};
 const cors = require('cors')
 const ejs = require('ejs');
 const session = require('express-session');
-const requiredLogin = require("./middleware/requiredLogin");
+//const requiredLogin = require("./middleware/requiredLogin");
 
 
 
@@ -36,30 +36,33 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(express.json());
 app.use(require('./router'))
-app.use(cors({
-  origin: false
-}))
-app.use(session({
-  secret:"Confidential",
-  cookie: {maxAge: 900000},
-  resave: true,
-  saveUninitialized: false
-}))
+// app.use(cors({
+//   origin: false
+// }))
+// app.use(session({
+//   secret:"Confidential",
+//   cookie: {maxAge: 900000},
+//   resave: true,
+//   saveUninitialized: false
+// }))
 
 const req = require('express/lib/request');
 app.use(require('./routes/loginRoutes'));
 app.use(require('./routes/signupRoutes'))
+app.use(require('./routes/camera'))
 app.use("/logout", require('./routes/logout'))
-app.use("/profile", requiredLogin, require('./routes/profile'))
-app.use("/camera", requiredLogin, require('./routes/camera'))
-app.use("/discover",requiredLogin,require('./routes/discover'))
-app.use("/single_post",requiredLogin,require('./routes/single_post'))
-app.use("/edit_profile", requiredLogin, require('./routes/edit_profile'))
-app.use("/liked_posts",requiredLogin,require('./routes/liked_posts'))
-app.use("/profile",requiredLogin,require('./routes/profile'))
-app.use("/search",requiredLogin,require('./routes/search'))
-app.use("/index",requiredLogin,require('./routes/index'))
-app.use("/user_profile",requiredLogin,require('./routes/user_profile'))
+
+
+// app.use("/profile", requiredLogin, require('./routes/profile'))
+// app.use("/camera", requiredLogin, require('./routes/camera'))
+// app.use("/discover",requiredLogin,require('./routes/discover'))
+// app.use("/single_post",requiredLogin,require('./routes/single_post'))
+// app.use("/edit_profile", requiredLogin, require('./routes/edit_profile'))
+// app.use("/liked_posts",requiredLogin,require('./routes/liked_posts'))
+// app.use("/profile",requiredLogin,require('./routes/profile'))
+// app.use("/search",requiredLogin,require('./routes/search'))
+// app.use("/index",requiredLogin,require('./routes/index'))
+// app.use("/user_profile",requiredLogin,require('./routes/user_profile'))
 
 
 app.listen(3000, () => {

@@ -36,7 +36,7 @@
     <script>
         const update=document.getElementById('post');
         update.addEventListener('click', function(){
-            fetch('/camera', {
+            fetch('https://localhost:3000/camera', {
                 method: 'post',
                 headers:{'Content-Type':'application/json'},
                 body: JSON.stringify({

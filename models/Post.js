@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const { required } = require('nodemon/lib/config');
+const {ObjectId}=mongoose.Schema.Types
+//const { required } = require('nodemon/lib/config');
 
 const Schema = mongoose.Schema;
 
@@ -20,19 +21,23 @@ const PostSchema=new Schema({
     },
     caption: {
         type: String,
-        //required: true
+        required: true
     },
     hashtags: {
         type: String,
-        //required: true
+        required: true
+    },
+    postedBy:{
+        type: ObjectId,
+        ref: "User"
     },
     username: {
         type: String,
-        //required: true
+        required: true
     },
     profile_image: {
         type: String,
-        //required: true
+        required: true
     }
 }, {timestamps: true});
 

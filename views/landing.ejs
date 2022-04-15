@@ -49,13 +49,13 @@
                     <span class="underline"></span>
                 </button>
                 <form class="form form-login" id="form-login" method="post" action="/login">
-                    <p id="error_message1" class="text-center alert-danger"></p>
+                    <p id="error_message1" class="text-center alert-danger"><%  %> </p>
                     <fieldset>
                         <legend>Please, enter your email and password for login.</legend>
                         <div class="input-block">
                             <label for="login-username">E-mail</label>
-                            <input id="login-username" type="text" placeholder="Enter your username"
-                                name="login_username" required>
+                            <input id="login-username" type="email" placeholder="Enter your email"
+                                name="login_email" required>
                         </div>
                         <div class="input-block">
                             <label for="login-password">Password</label>
@@ -63,7 +63,7 @@
                                 name="login_password" required>
                         </div>
                     </fieldset>
-                    <button type="submit" class="btn-login">Login</button>
+                    <button type="submit" id="login" class="btn-login">Login</button>
                 </form>
             </div>
 
@@ -79,20 +79,20 @@
                         <legend>Please, enter your email, password and password confirmation for sign up.</legend>
                         <div class="input-block">
                             <label for="signup-username">Username</label>
-                            <input id="signup-username" type="text" placeholder="Enter your username" name="username"
+                            <input id="signup-username" type="text" placeholder="Enter your username" name="signup_username"
                                 required>
                         </div>
                         <div class="input-block">
                             <label for="signup-email">E-mail</label>
-                            <input id="signup-email" type="email" placeholder="Enter your email" name="email" required>
+                            <input id="signup-email" type="email" placeholder="Enter your email" name="signup_email" required>
                         </div>
                         <div class="input-block">
                             <label for="signup-password">Password</label>
                             <input id="signup-password" type="password" placeholder="Enter your password"
-                                name="password" required>
+                                name="signup_password" required>
                         </div>
                     </fieldset>
-                    <button type="submit" class="btn-signup">Sign Up</button>
+                    <button type="submit" id="signup" class="btn-signup">Sign Up</button>
                 </form>
             </div>
         </div>
@@ -106,6 +106,51 @@
                 this.parentElement.classList.add('is-active')
             })
         })
+
+
+        const login=document.getElementById('login');
+        let error_message1 = document.getElementById('error_message1');
+        login.addEventListener('click', function(){
+            console.log(email,password);
+            fetch('/landing', {
+                method: 'post',
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({
+                    email:login_email,
+                    password:login_password
+                })
+            }).then(res=>{
+                res.json()
+            }).then(data=>{
+                console.log(data)
+                if(data.error){
+                    error_message1.innerHTML = data.error;
+                }
+            })
+        })
+
+        const signup=document.getElementById('signup');
+        let error_message2 = document.getElementById('error_message2');
+        signup.addEventListener('click', function(){
+            fetch('/landing', {
+                method: 'post',
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({
+                    username:signup_username,
+                    password:signup_password,
+                    email:signup_email
+                })
+            }).then(res=>{
+                res.json()
+            }).then(data=>{
+                console.log(data)
+                if(data.error){
+                    error_message2.innerHTML = data.error;
+                }
+            })
+        })
+
+
         let form = document.getElementById('form-login')
         function verifyForm1() {
             let email = document.getElementById("login-username").value;
