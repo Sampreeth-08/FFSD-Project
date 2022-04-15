@@ -5,48 +5,47 @@ const bodyParser = require("body-parser")
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose")
 const jwt = require("jsonwebtoken")
-const {JWT_SECRET} = require('../keys')
-const requireLogin=require('../middleware/requiredLogin')
+const { JWT_SECRET } = require('../keys')
+const requireLogin = require('../middleware/requiredLogin')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
 const User = mongoose.model("User");
 
-router.get('/protected',requireLogin,(req,res)=>{
+router.get('/protected', requireLogin, (req, res) => {
     res.send("Hello user")
 })
 
-router.post('/login',(req,res)=>{
+router.post('/login', (req, res) => {
     console.log(req.body);
-    // const {email,password}=req.body
-    const email = req.body.username
-    const password = req.body.password
+    const email = req.body.login_email
+    const password = req.body.login_password
     console.log(password);
-    if(!email || !password){
-        return res.status(422).json({error: "Please add email or password"})
+    if (!email || !password) {
+        return res.status(422).json({ error: "Please add email or password" })
     }
-    User.findOne({email:email})
-    .then(savedUser=>{
-        if(!savedUser){
-            return res.status(422).json({error: "Invalid email or password"})
-        }
-        bcrypt.compare(password,savedUser.password)
-        .then(doMatch=>{
-            if(doMatch){
-                //res.json({message: "Successfully signed in"})
-                const token=jwt.sign({_id:savedUser._id},JWT_SECRET)
-                const {_id,username,email}=savedUser
-                res.json({token, user:{_id,username,email}})
+    User.findOne({ email: email })
+        .then(savedUser => {
+            if (!savedUser) {
+                return res.status(422).json({ error: "Invalid email or password" })
             }
-            else{
-                return res.status(422).json({error: "Invalid email or password"})
-            }
+            bcrypt.compare(password, savedUser.password)
+                .then(doMatch => {
+                    if (doMatch) {
+                        //res.json({message: "Successfully signed in"})
+                        const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET)
+                        const { _id, username, email } = savedUser
+                        res.json({ token, user: { _id, username, email } })
+                    }
+                    else {
+                        return res.status(422).json({ error: "Invalid email or password" })
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         })
-        .catch(err=>{
-            console.log(err)
-        })
-    })
 })
 
 // router.post("/login", function (req, res) {

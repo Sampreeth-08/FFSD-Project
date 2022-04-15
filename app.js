@@ -52,7 +52,6 @@ app.use(require('./routes/signupRoutes'))
 app.use(require('./routes/camera'))
 app.use("/logout", require('./routes/logout'))
 
-
 // app.use("/profile", requiredLogin, require('./routes/profile'))
 // app.use("/camera", requiredLogin, require('./routes/camera'))
 // app.use("/discover",requiredLogin,require('./routes/discover'))

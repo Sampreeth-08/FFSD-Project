@@ -1,3 +1,3 @@
-module.exports={
-    JWT_SECRET:"HighlyConfidential"
+module.exports = {
+    JWT_SECRET: "HighlyConfidential"
 }

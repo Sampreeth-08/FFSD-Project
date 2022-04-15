@@ -49,13 +49,15 @@
                     <span class="underline"></span>
                 </button>
                 <form class="form form-login" id="form-login" method="post" action="/login">
-                    <p id="error_message1" class="text-center alert-danger"><%  %> </p>
+                    <p id="error_message1" class="text-center alert-danger">
+                        <% %>
+                    </p>
                     <fieldset>
                         <legend>Please, enter your email and password for login.</legend>
                         <div class="input-block">
                             <label for="login-username">E-mail</label>
-                            <input id="login-username" type="email" placeholder="Enter your email"
-                                name="login_email" required>
+                            <input id="login-username" type="email" placeholder="Enter your email" name="login_email"
+                                required>
                         </div>
                         <div class="input-block">
                             <label for="login-password">Password</label>
@@ -79,12 +81,13 @@
                         <legend>Please, enter your email, password and password confirmation for sign up.</legend>
                         <div class="input-block">
                             <label for="signup-username">Username</label>
-                            <input id="signup-username" type="text" placeholder="Enter your username" name="signup_username"
-                                required>
+                            <input id="signup-username" type="text" placeholder="Enter your username"
+                                name="signup_username" required>
                         </div>
                         <div class="input-block">
                             <label for="signup-email">E-mail</label>
-                            <input id="signup-email" type="email" placeholder="Enter your email" name="signup_email" required>
+                            <input id="signup-email" type="email" placeholder="Enter your email" name="signup_email"
+                                required>
                         </div>
                         <div class="input-block">
                             <label for="signup-password">Password</label>
@@ -108,43 +111,43 @@
         })
 
 
-        const login=document.getElementById('login');
+        const login = document.getElementById('login');
         let error_message1 = document.getElementById('error_message1');
-        login.addEventListener('click', function(){
-            console.log(email,password);
+        login.addEventListener('click', function () {
+            console.log(email, password);
             fetch('/landing', {
                 method: 'post',
-                headers:{'Content-Type':'application/json'},
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    email:login_email,
-                    password:login_password
+                    email: login_email,
+                    password: login_password
                 })
-            }).then(res=>{
+            }).then(res => {
                 res.json()
-            }).then(data=>{
+            }).then(data => {
                 console.log(data)
-                if(data.error){
+                if (data.error) {
                     error_message1.innerHTML = data.error;
                 }
             })
         })
 
-        const signup=document.getElementById('signup');
+        const signup = document.getElementById('signup');
         let error_message2 = document.getElementById('error_message2');
-        signup.addEventListener('click', function(){
+        signup.addEventListener('click', function () {
             fetch('/landing', {
                 method: 'post',
-                headers:{'Content-Type':'application/json'},
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    username:signup_username,
-                    password:signup_password,
-                    email:signup_email
+                    username: signup_username,
+                    password: signup_password,
+                    email: signup_email
                 })
-            }).then(res=>{
+            }).then(res => {
                 res.json()
-            }).then(data=>{
+            }).then(data => {
                 console.log(data)
-                if(data.error){
+                if (data.error) {
                     error_message2.innerHTML = data.error;
                 }
             })
@@ -152,6 +155,7 @@
 
 
         let form = document.getElementById('form-login')
+        let form1 = document.getElementById('form-signup')
         function verifyForm1() {
             let email = document.getElementById("login-username").value;
             let regemail = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
@@ -166,34 +170,36 @@
             }
             return true;
         }
-        // function verifyForm2() {
-        //     let email = document.getElementById("signup-email").value;
-        //     let regemail = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
-        //     let password = document.getElementById('signup-password').value;
-        //     let error_message = document.getElementById('error_message2');
-        //     let user = document.getElementById("signup-username").value;
-        //     let reguser = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
-        //     let str = ``;
-        //     if (!reguser.test(user)) {
-        //         str += `Username should only contain (alphabet digits _ .) ,where consecutive dot's are not allowed and username is not allowed to start or end with .<br>`
-        //     }
-        //     if (!regemail.test(email)) {
-        //         str += `Invalid Email Address<br>`
-        //     }
-        //     if (password.length < 6) {
-        //         str += `Password is too short<br>`
-        //     }
-        //     if (str !== ``) {
-        //         error_message.innerHTML = str
-        //         return false
-        //     }
-        //     return true;
-        // }
+        function verifyForm2() {
+            let password = document.getElementById('signup-password').value;
+            let error_message = document.getElementById('error_message2');
+            let user = document.getElementById("signup-username").value;
+            let reguser = /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
+            let repassword = /^(?=.*[!@#$&*])(?=.*[0-9].*[0-9]).{8}$/;
+            let str = ``;
+            if (!reguser.test(user)) {
+                str += `Username should only contain (8-20) characters <br> (alphabet digits _ .) , <br> where consecutive special characters are not allowed <br> and username is not allowed to start or end with .<br>`
+            }
+            if (!repassword.test(password)) {
+                str += `Ensure password has one special case letter.<br>Ensure password has two digits.<br>Ensure password is of length 8.<br>`
+            }
+            if (str !== ``) {
+                error_message.innerHTML = str
+                return false
+            }
+            return true;
+        }
 
         document.getElementById('form-login').addEventListener('submit', (e) => {
             e.preventDefault();
             if (verifyForm1()) {
                 form.submit();
+            }
+        })
+        document.getElementById('form-signup').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (verifyForm2()) {
+                form1.submit();
             }
         })
     </script>
