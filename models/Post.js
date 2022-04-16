@@ -17,7 +17,7 @@ const PostSchema = new Schema({
     },
     image: {
         type: String,
-        default: "/img/4.jpg"
+        required: true
     },
     caption: {
         type: String,

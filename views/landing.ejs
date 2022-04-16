@@ -117,7 +117,10 @@
             console.log(email, password);
             fetch('/landing', {
                 method: 'post',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': "Bearer"+localStorage.getItem("jwt")
+                },
                 body: JSON.stringify({
                     email: login_email,
                     password: login_password
@@ -131,6 +134,8 @@
                     error_message1.innerHTML = data.error;
                 }
                 else{
+                    localStorage.setItem("jwt", data.token)
+                    localStorage.setItem("user", JSON.stringify(data.user))
                     window.location.href = 'http://localhost:3000'
                 }
             })

@@ -56,14 +56,15 @@ router.get('/camera', (req, res)=>{
 
 router.post('/camera', (req, res) => {
   console.log(req.body);
-  const { image, hashtags, caption } = req.body;
-  if (!image || !hashtags || !caption) {
+  const { pic, hashtags, caption } = req.body;
+  if (!pic || !hashtags || !caption) {
     return res.status(422).json({ error: "Please add all the fields" })
   }
   req.user.password = undefined
   const post = new Post({
     caption,
     hashtags,
+    image: pic,
     postedBy: req.user
   })
   Post.save()
