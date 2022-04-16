@@ -15,7 +15,11 @@ router.get('/', (req, res) => {
 })
 
 router.post('/signup', (req, res) => {
-  const { username, email, password } = req.body;
+  const username = req.body.signup_username;
+  const email = req.body.signup_email;
+  const password = req.body.signup_password;
+
+  console.log(req.body);
   if (!email || !password || !username) {
     return res.status(422).json({ error: "Please add all the fields" })
   }

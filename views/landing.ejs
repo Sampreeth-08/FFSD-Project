@@ -180,9 +180,9 @@
             if (!reguser.test(user)) {
                 str += `Username should only contain (8-20) characters <br> (alphabet digits _ .) , <br> where consecutive special characters are not allowed <br> and username is not allowed to start or end with .<br>`
             }
-            if (!repassword.test(password)) {
-                str += `Ensure password has one special case letter.<br>Ensure password has two digits.<br>Ensure password is of length 8.<br>`
-            }
+            // if (!repassword.test(password)) {
+            //     str += `Ensure password has one special case letter.<br>Ensure password has two digits.<br>Ensure password is of length 8.<br>`
+            // }
             if (str !== ``) {
                 error_message.innerHTML = str
                 return false
