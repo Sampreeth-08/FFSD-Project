@@ -47,6 +47,9 @@ app.use(require('./router'))
 // }))
 
 const req = require('express/lib/request');
+app.get("/landing", (req,res)=>{
+  res.render("landing")
+})
 app.use(require('./routes/loginRoutes'));
 app.use(require('./routes/signupRoutes'))
 app.use(require('./routes/camera'))

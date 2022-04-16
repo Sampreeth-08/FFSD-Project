@@ -21,7 +21,7 @@ router.post('/login', (req, res) => {
     console.log(req.body);
     const email = req.body.login_email
     const password = req.body.login_password
-    console.log(password);
+    //console.log(password);
     if (!email || !password) {
         return res.status(422).json({ error: "Please add email or password" })
     }
@@ -33,10 +33,11 @@ router.post('/login', (req, res) => {
             bcrypt.compare(password, savedUser.password)
                 .then(doMatch => {
                     if (doMatch) {
-                        //res.json({message: "Successfully signed in"})
+                        res.json({message: "Successfully signed in"})
                         const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET)
                         const { _id, username, email } = savedUser
                         res.json({ token, user: { _id, username, email } })
+                        res.redirect("landing")
                     }
                     else {
                         return res.status(422).json({ error: "Invalid email or password" })

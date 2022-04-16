@@ -124,10 +124,14 @@
                 })
             }).then(res => {
                 res.json()
+                if (res.ok) window.location.href = 'http://localhost:3000'
             }).then(data => {
-                console.log(data)
+                //console.log(data)
                 if (data.error) {
                     error_message1.innerHTML = data.error;
+                }
+                else{
+                    window.location.href = 'http://localhost:3000'
                 }
             })
         })
@@ -146,9 +150,12 @@
             }).then(res => {
                 res.json()
             }).then(data => {
-                console.log(data)
+                //console.log(data)
                 if (data.error) {
                     error_message2.innerHTML = data.error;
+                }
+                else{
+                    window.location.href = 'http://localhost:3000/login'
                 }
             })
         })
