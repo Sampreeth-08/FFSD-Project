@@ -47,16 +47,16 @@ app.use(require('./router'))
 // }))
 
 const req = require('express/lib/request');
-app.get("/landing", (req,res)=>{
-  res.render("landing")
-})
+// app.get("/index", (req,res)=>{
+//   res.render("index")
+// })
 app.use(require('./routes/loginRoutes'));
 app.use(require('./routes/signupRoutes'))
 app.use(require('./routes/camera'))
 app.use("/logout", require('./routes/logout'))
 
 // app.use("/profile", requiredLogin, require('./routes/profile'))
-// app.use("/camera", requiredLogin, require('./routes/camera'))
+//app.use("/camera", requiredLogin, require('./routes/camera'))
 // app.use("/discover",requiredLogin,require('./routes/discover'))
 // app.use("/single_post",requiredLogin,require('./routes/single_post'))
 // app.use("/edit_profile", requiredLogin, require('./routes/edit_profile'))

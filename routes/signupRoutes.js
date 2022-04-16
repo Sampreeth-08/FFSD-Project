@@ -37,7 +37,8 @@ router.post('/signup', (req, res) => {
           })
           user.save()
             .then(user => {
-              res.json({ message: "Saved successfully" })
+              //res.json({ message: "Saved successfully" })
+              res.redirect("login")
             })
             .catch(err => {
               console.log(err)

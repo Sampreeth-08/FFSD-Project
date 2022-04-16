@@ -19,8 +19,9 @@ router.get("/", function (req, res) {
 })
 
 router.get("/index", function (req, res) {
-    console.log(req.headers.cookie)
-    res.render("index", { title: req.session.user.username })
+    //console.log(req.headers.cookie)
+    // res.render("index", { title: req.session.user.username })
+    res.render("index")
 })
 
 

@@ -9,31 +9,26 @@
         </p>
         <div class="camera">
             <div class="camera-image">
-                <% if(typeof image !="undefined" ? image : "" ) {%>
-                    <img style="width:400px; height:400px;" src="/img/<%=(typeof image != " undefined" ? image : "" )%>"
-                    alt="">
-                    <% } else{ %>
-                        <img style="width:400px; height:400px;" src="/img/4.jpg" alt="">
-                        <% } %>
+                <img style="width:400px; height:400px;" id="disp" src="" alt="">
 
-                            <!-- <img src="/img/4.jpg" alt=""> -->
-                            <form action="" class="camera-form" method="post" enctype="multipart/form-data">
-                                <div class="form-group">
-                                    <input type="file" id="image" name="image" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="caption" name="caption" class="form-control"
-                                        placeholder="type caption..." required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="hashtags" name="hashtags" class="form-control"
-                                        placeholder="type hashtags..." required>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" id="post" name="upload_image_btn"
-                                        class="upload-btn">Post</button>
-                                </div>
-                            </form>
+                    <!-- <img src="/img/4.jpg" alt=""> -->
+                    <form action="/camera" class="camera-form" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="file" id="image" name="image" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="caption" name="caption" class="form-control"
+                                placeholder="type caption..." required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="hashtags" name="hashtags" class="form-control"
+                                placeholder="type hashtags..." required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" id="post" name="upload_image_btn"
+                                class="upload-btn">Post</button>
+                        </div>
+                    </form>
             </div>
         </div>
     </div>
@@ -42,8 +37,35 @@
         crossorigin="anonymous"></script>
 
     <script>
+
+        const image=document.getElementById('image');
+        image.addEventListener('change', (e)=>{
+            console.log(e.target.files)
+            //const disp=document.getElementById('disp');
+            //disp.src=e.target.files[0]
+        })
+
+
         const update = document.getElementById('post');
         update.addEventListener('click', function () {
+            const data=new FormData()
+            data.append("file", image)
+            data.append("upload_preset", "celestial")
+            data.append("cloud_name", "cloudcelestial")
+
+            // fetch('https://api.cloudinary.com/v1_1/celestialcloud/image/upload', {
+            //     method: "post",
+            //     body: data
+            // })
+            // .then(res=>res.json())
+            // .then(data=>{
+            //     console.log(data);
+            // })
+            // .catch(err=>{
+            //     console.log(err);
+            // })
+
+
             fetch('https://localhost:3000/camera', {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
