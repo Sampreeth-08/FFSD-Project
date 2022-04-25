@@ -3,7 +3,7 @@ var router = express.Router();
 var User = require("../models/users");
 var passport = require("passport");
 var middleware = require("../middleware");
-const bcrypt=require('bcrypt');
+const bcrypt = require('bcrypt');
 var path = require("path"),
     mongoose = require("mongoose");
 
@@ -13,11 +13,11 @@ var dburl = process.env.DATABASEURL || "mongodb+srv://celestial:celestial@celest
 var conn = mongoose.createConnection(dburl);
 
 
-router.get("/", function(req, res){
+router.get("/", function (req, res) {
     res.render("signup");
 });
 
-router.get("/signup", function(req,res){
+router.get("/signup", function (req, res) {
     res.render("signup");
 });
 
@@ -27,36 +27,36 @@ router.post("/signup", async (req, res, next) => {
     let password = req.body.password;
 
     if (email && username && password) {
-        let user=await User.findOne({
+        let user = await User.findOne({
             $or: [
-                {username: username},
-                {email: email}
+                { username: username },
+                { email: email }
             ]
         })
-        .catch((error)=>{
-            console.log(error);
-            payload.errorMessage="Something went wrong";
-            res.status(200).render("signup", {error: "Something went wrong"});
-        });
+            .catch((error) => {
+                console.log(error);
+                payload.errorMessage = "Something went wrong";
+                res.status(200).render("signup", { error: "Something went wrong" });
+            });
         // .then((user)=>{
         //     console.log(this.user);
         // })
-        if(user==null){
-            let data=req.body;
-            data.password=await bcrypt.hash(password, 10);
+        if (user == null) {
+            let data = req.body;
+            data.password = await bcrypt.hash(password, 10);
             User.create(data)
-            .then((user)=>{
-                //console.log(user);
-                req.session.user=user;
-                return res.redirect("/index")
-            })
+                .then((user) => {
+                    //console.log(user);
+                    req.session.user = user;
+                    return res.redirect("/index")
+                })
         }
-        else{
-            if(email==user.email){
+        else {
+            if (email == user.email) {
                 // payload.errorMessage="Email already in use";
             }
-            else{
-                payload.errorMessage="Username already in use";
+            else {
+                payload.errorMessage = "Username already in use";
             }
             res.status(200).render("signup", payload);
         }
@@ -68,34 +68,34 @@ router.post("/signup", async (req, res, next) => {
 
 })
 
-router.get("/login", function(req, res){
+router.get("/login", function (req, res) {
     res.render("login");
 });
 
-router.post("/login",  (req, res, next) => {
+router.post("/login", (req, res, next) => {
     //let payload = req.body;
     // console.log(req.body);
-    if(req.body.email && req.body.password){
+    if (req.body.email && req.body.password) {
         User.findOne({
             $or: [
-                {username: req.body.email},
-                {email: req.body.email}
+                { username: req.body.email },
+                { email: req.body.email }
             ]
-        },(err,data)=>{
-            if(err){
+        }, (err, data) => {
+            if (err) {
                 console.log(err);
             }
             console.log(data);
-            if(data){
-                
-                bcrypt.compare(req.body.password, data.password,(err,result)=>{
-                    if(result===true){
+            if (data) {
+
+                bcrypt.compare(req.body.password, data.password, (err, result) => {
+                    if (result === true) {
                         console.log("hgtfvthh");
-                        req.session.user=data;
+                        req.session.user = data;
                         return res.redirect("/index");
                     }
                 });
-   
+
             }
         })
         // .catch((error)=>{
@@ -110,7 +110,7 @@ router.post("/login",  (req, res, next) => {
     // res.status(200).render("login")
 });
 
-router.get("/logout", function(req, res){
+router.get("/logout", function (req, res) {
     req.logout();
     req.flash("success", "Successfully logged out");
     res.redirect("/");

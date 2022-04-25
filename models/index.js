@@ -11,8 +11,8 @@ var postSchema = new mongoose.Schema({
 
     comments: [
         {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Comment"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Comment"
         }
     ],
     creator: {
@@ -20,7 +20,7 @@ var postSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         },
-        
+
         username: String,
         profPic: String
     }
