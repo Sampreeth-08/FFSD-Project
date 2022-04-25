@@ -44,8 +44,7 @@
                         </div>
                         <div class="comment-wrapper">
                             <img src="display/<%= post[i].creator.profPic %>" alt="" class="icon">
-                            <form action="/index/<%= post[i]._id %>/comment" method="POST"
-                                style="margin-top: 10px; margin-bottom: 10px;">
+                            <form action="/index/<%= post[i]._id %>/comment" method="POST">
                                 <input type="text" class="comment-box" placeholder="Add a comment">
                                 <button class="comment-btn">comment</button>
                             </form>

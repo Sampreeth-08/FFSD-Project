@@ -49,7 +49,7 @@ router.get("/index", middleware.isLoggedIn, function (req, res) {
         }
         else {
             console.log(foundPost);
-            res.render("index", { post: foundPost });
+            res.render("index", { post: foundPost, username: req.session.user.username });
             //console.log(foundPost.comments);
         }
     });

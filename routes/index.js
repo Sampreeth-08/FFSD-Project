@@ -115,5 +115,43 @@ router.get("/logout", function (req, res) {
     req.flash("success", "Successfully logged out");
     res.redirect("/");
 });
+let query = '';
+router.get("/search/:name", (req, res) => {
+    let regex = new RegExp(req.params.name, 'i');
+    User.find({ username: regex }).then((result) => {
+        res.render('search', { x: result })
+    })
+})
+router.post('/search', (req, res) => {
+    query = req.body.search;
+    if (query != '') {
+        query = 'search/' + query;
+        res.redirect(query)
+    }
+    else {
+        res.redirect('/index')
+    }
+})
+router.get('/edit_profile', (req, res) => {
+    res.render('edit_profile');
+})
+router.post('/edit_profile', (req, res, next) => {
+    updateRecord(req, res);
+})
+function updateRecord(req, res) {
+    let foundid;
+    User.find({ email: req.body.email }).then((result) => {
+        // foundid = result[0]._id.toString();
+        foundid = result[0]._id
+        User.findByIdAndUpdate({ _id: foundid }, {
+            username: req.body.username
+        }, { new: true }, (err, doc) => {
+            if (!err) { res.redirect('/edit_profile'); }
+            else {
+                console.log('Error during record update : ' + err);
+            }
+        });
+    })
 
+}
 module.exports = router;
