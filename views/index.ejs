@@ -3,6 +3,47 @@
     <section class="main">
         <div class="wrapper">
             <div class="left-col">
+                <% for(var i=(post.length-1);i>=0;i--){ %>
+                    <div class="info">
+                        <div class="user">
+                            <div class="profile-pic">
+                                <a href="/<%= post[i].creator.id %>/userProfile ">
+                                    <img src="display/<%= post[i].creator.profPic %>" alt="">
+                                </a>
+                            </div>
+                            <a class="username" href="/<%= post[i].creator.id %>/userProfile"><%= post[i].creator.username %></a>
+                        </div>
+                        <i class="fas fa-plus options"></i>
+                    </div>
+
+                    <img src="display/<%= post[i].imageName %>" class="post-image">
+                    <div class="post-content">
+                        <div class="reaction-wrapper">
+                            <i class="icon fas fa-heart"></i>
+                            <i class="icon fas fa-comment"></i>
+                        </div>
+
+                        <p class="likes"><%= post[i].likes %> likes</p>
+                        <% if(post[i].comments.length>0){ %> 
+                        <p class="description"><span><%=(typeof post[i].comments[post[i].comments.length-1].author.username !="undefined" ? post[i].comments[post[i].comments.length-1].author.username : "" )  %></span> <%=post[i].comments[post[i].comments.length-1].text%></p>
+                        <% } %> 
+                        <p class="post-time"><%= post[i].timestamp %> </p>
+                    </div>
+                    <div class="comment-wrapper">
+                        <img src="display/<%= post[i].creator.profPic %>" alt="" class="icon">
+                        <form action="/index/<%= post[i]._id %>/comment" method="POST" style="margin-top: 10px; margin-bottom: 10px;">
+                            <input type="text" class="comment-box" placeholder="Add a comment">
+                            <button class="comment-btn">comment</button>
+                        </form>
+                    </div>
+
+                    <br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+
+                <% } %>
                 <div class="post">
                     <div class="info">
                         <div class="user">
@@ -29,7 +70,13 @@
                         <button class="comment-btn">comment</button>
                     </div>
                 </div>
-                <br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+
+
+
                 <div class="post">
                     <div class="info">
                         <div class="user">

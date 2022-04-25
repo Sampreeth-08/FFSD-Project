@@ -1,23 +1,21 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt')
-const saltrounds = 10;
-const { body, validationResult } = require('express-validator');
-const validator = require('validator');
-const cookieParser = require('cookie-parser');
-const server = require('http').createServer();
-const users = {};
-const cors = require('cors')
-const ejs = require('ejs');
-const session = require('express-session');
-//const requiredLogin = require("./middleware/requiredLogin");
+var express = require("express");
+var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
+var methodOverride = require("method-override");
+var flash = require("connect-flash");
+var path = require("path");
 
+var User = require("./models/users"),
+    passport = require("passport"),
+    localStrategy = require("passport-local"),
+    passportLocalMongoose = require("passport-local-mongoose");
 
-
+var feedRoute = require("./routes/feed"),
+    commentRoute = require("./routes/comments"),
+    authRoute = require("./routes/index");
+  
 const app = express();
 
-const PASSWORD = process.env.PASSWORD.toString();
 mongoose.connect("mongodb+srv://celestial:celestial@celestialcluster.zrcyq.mongodb.net/CelestialDB?retryWrites=true&w=majority")
   .then(() => {
     console.log("Database connection successful")
@@ -26,47 +24,34 @@ mongoose.connect("mongodb+srv://celestial:celestial@celestialcluster.zrcyq.mongo
     console.log("Database connection error" + err)
   })
 
-
-require('./models/User')
-require('./models/Post')
-
-app.set('view engine', 'ejs');
-app.use(cookieParser())
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
-app.use(express.json());
-app.use(require('./router'))
-// app.use(cors({
-//   origin: false
-// }))
-// app.use(session({
-//   secret:"Confidential",
-//   cookie: {maxAge: 900000},
-//   resave: true,
-//   saveUninitialized: false
-// }))
-
-const req = require('express/lib/request');
-// app.get("/index", (req,res)=>{
-//   res.render("index")
-// })
-app.use(require('./routes/loginRoutes'));
-app.use(require('./routes/signupRoutes'))
-app.use(require('./routes/camera'))
-app.use("/logout", require('./routes/logout'))
-
-// app.use("/profile", requiredLogin, require('./routes/profile'))
-//app.use("/camera", requiredLogin, require('./routes/camera'))
-// app.use("/discover",requiredLogin,require('./routes/discover'))
-// app.use("/single_post",requiredLogin,require('./routes/single_post'))
-// app.use("/edit_profile", requiredLogin, require('./routes/edit_profile'))
-// app.use("/liked_posts",requiredLogin,require('./routes/liked_posts'))
-// app.use("/profile",requiredLogin,require('./routes/profile'))
-// app.use("/search",requiredLogin,require('./routes/search'))
-// app.use("/index",requiredLogin,require('./routes/index'))
-// app.use("/user_profile",requiredLogin,require('./routes/user_profile'))
+app.set("view engine", "ejs");
+app.use(flash());
 
 
-app.listen(3000, () => {
-  console.log("Server started on port 3000")
-})
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
+app.use(express.static(__dirname + "/public"));
+
+app.use(require("express-session")({
+  secret: "Wake up to reality",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 30 * 24 * 60 * 60 * 1000
+  }
+}));
+
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
+  next();
+});
+
+app.use(feedRoute);
+//app.use(commentRoute);
+app.use(authRoute);
+
+app.listen(3000, function(){
+  console.log("Celestial server is running..");
+});

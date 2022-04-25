@@ -1,29 +1,36 @@
 <%- include('partials/header') %>
 
     <div class="camera-container">
-        <p class="text-center mt-4 alert-success">
-            <%=(typeof successMsg !="undefined" ? successMsg : "" )%>
-        </p>
-        <p class="text-center mt-4 alert-danger">
-            <%=(typeof errorMsg !="undefined" ? errorMsg : "" )%>
-        </p>
+        <div class="msg-container">
+            <% if(error && error.length>0){ %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+              <% } %>
+              
+              <% if(success && success.length>0){ %>
+                <div class="alert alert-success" role="alert">
+                    <%= success %>
+                </div>
+              <% } %>
+        </div>
         <div class="camera">
             <div class="camera-image">
                 <img style="width:400px; height:400px;" id="disp" src="" alt="">
 
                     <!-- <img src="/img/4.jpg" alt=""> -->
-                    <form action="/camera" class="camera-form" method="post" enctype="multipart/form-data">
+                    <form action="/index" class="camera-form" method="post" enctype="multipart/form-data">
                         <div class="form-group">
-                            <input type="file" id="image" name="image" class="form-control" required>
+                            <input type="file" id="image" name="file" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <input type="text" id="caption" name="caption" class="form-control"
                                 placeholder="type caption..." required>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <input type="text" id="hashtags" name="hashtags" class="form-control"
                                 placeholder="type hashtags..." required>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <button type="submit" id="post" name="upload_image_btn"
                                 class="upload-btn">Post</button>
@@ -36,7 +43,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
-    <script>
+    <!-- <script>
 
         const image=document.getElementById('image');
         image.addEventListener('change', (e)=>{
@@ -82,7 +89,7 @@
                 console.log(response)
             })
         })
-    </script>
+    </script> -->
     </body>
 
     </html>
