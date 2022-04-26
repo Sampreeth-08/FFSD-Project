@@ -5,9 +5,7 @@ var userSchema = new mongoose.Schema({
    email: String,
    password: String,
    profPic: String,
-   pictures: [],
-   following: [],
-   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+   pictures: []
 });
 
 module.exports = mongoose.model("User", userSchema);

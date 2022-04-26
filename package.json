@@ -1,7 +1,6 @@
 {
   "name": "celestial",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -44,6 +43,8 @@
     "passport-local-mongoose": "^7.0.0",
     "pug": "^3.0.2",
     "socket.io": "^4.4.1",
+    "uuid": "^8.3.2",
     "validator": "^13.7.0"
-  }
+  },
+  "description": ""
 }

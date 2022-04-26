@@ -3,13 +3,69 @@
     <section class="main">
         <div class="wrapper">
             <div class="left-col">
+
+                <div class="post">
+                    <div class="info">
+                        <div class="user">
+                            <div class="profile-pic"><img src="/img/2.png" alt=""></div>
+                            <p class="username">Talyor Malik</p>
+                        </div>
+                        <i class="fas fa-plus options"></i>
+                    </div>
+
+                    <img src="/img/1.jpg" class="post-image">
+                    <div class="post-content">
+                        <div class="reaction-wrapper">
+                            <i class="icon fas fa-heart"></i>
+                            <i class="icon fas fa-comment"></i>
+                        </div>
+
+                        <p class="likes">69 likes</p>
+                        <p class="description"><span>User</span> This is a description</p>
+                        <p class="post-time">31/02/3045</p>
+                    </div>
+                    <div class="comment-wrapper">
+                        <img src="/img/2.png" alt="" class="icon">
+                        <input type="text" class="comment-box" placeholder="Add a comment">
+                        <button class="comment-btn">comment</button>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="info">
+                        <div class="user">
+                            <div class="profile-pic"><img src="/img/2.png" alt=""></div>
+                            <p class="username">Ada Lovelace</p>
+                        </div>
+                        <i class="fas fa-plus options"></i>
+                    </div>
+
+                    <img src="/img/12.jpeg" class="post-image">
+                    <div class="post-content">
+                        <div class="reaction-wrapper">
+                            <i class="icon fas fa-heart"></i>
+                            <i class="icon fas fa-comment"></i>
+                        </div>
+
+                        <p class="likes">420 likes</p>
+                        <p class="description"><span>User</span> This is a description</p>
+                        <p class="post-time">31/02/3045</p>
+                    </div>
+
+                    <div class="comment-wrapper">
+                        <img src="/img/2.png" alt="" class="icon">
+                        <input type="text" class="comment-box" placeholder="Add a comment">
+                        <button class="comment-btn">comment</button>
+                    </div>
+                </div>
+
+
                 <% for(var i=(post.length-1);i>=0;i--){ %>
                     <div class="post">
                         <div class="info">
                             <div class="user">
                                 <div class="profile-pic">
                                     <a href="/<%= post[i].creator.id %>/userProfile ">
-                                        <img src="display/<%= post[i].creator.profPic %>" alt="">
+                                        <img src="/display/<%= post[i].creator.profPic %>" alt="">
                                     </a>
                                 </div>
                                 <a class="username" href="/<%= post[i].creator.id %>/userProfile">
@@ -19,7 +75,7 @@
                             <i class="fas fa-plus options"></i>
                         </div>
 
-                        <img src="display/<%= post[i].imageName %>" class="post-image">
+                        <img src="/<%= post[i].imgPath %>" class="post-image">
                         <div class="post-content">
                             <div class="reaction-wrapper">
                                 <i class="icon fas fa-heart"></i>
@@ -31,93 +87,28 @@
                             </p>
                             <% if(post[i].comments.length>0){ %>
                                 <p class="description"><span>
-                                        <%=(typeof post[i].comments[post[i].comments.length-1].author.username
-                                            !="undefined" ? post[i].comments[post[i].comments.length-1].author.username
-                                            : "" ) %>
+                                        <%= post[i].comments[post[i].comments.length-1].author.username %>
                                     </span>
                                     <%=post[i].comments[post[i].comments.length-1].text%>
                                 </p>
                                 <% } %>
-                                    <p class="post-time">
-                                        <%= post[i].timestamp %>
-                                    </p>
+                                <p class="post-time">
+                                    <%= post[i].timestamp %>
+                                </p>
                         </div>
-                        <div class="comment-wrapper">
+                        <div class="comment-wrapper" style="position: absolute; margin-right: 800px;">
                             <img src="display/<%= post[i].creator.profPic %>" alt="" class="icon">
-                            <form action="/index/<%= post[i]._id %>/comment" method="POST">
+                            <form class="comment-wrapper" action="/index/<%= post[i]._id %>/comment" method="POST">
                                 <input type="text" class="comment-box" placeholder="Add a comment">
                                 <button class="comment-btn">comment</button>
                             </form>
                         </div>
+                        <br><br><br><br><br><br><br><br>
+                        
                     </div>
-
-                    <br><br><br><br><br><br><br><br><br><br>
-
-
-
-
-
+                    <br><br><br><br><br><br><br>
                     <% } %>
-                        <div class="post">
-                            <div class="info">
-                                <div class="user">
-                                    <div class="profile-pic"><img src="/img/2.png" alt=""></div>
-                                    <p class="username">Talyor Malik</p>
-                                </div>
-                                <i class="fas fa-plus options"></i>
-                            </div>
-
-                            <img src="/img/1.jpg" class="post-image">
-                            <div class="post-content">
-                                <div class="reaction-wrapper">
-                                    <i class="icon fas fa-heart"></i>
-                                    <i class="icon fas fa-comment"></i>
-                                </div>
-
-                                <p class="likes">69 likes</p>
-                                <p class="description"><span>User</span> This is a description</p>
-                                <p class="post-time">31/02/3045</p>
-                            </div>
-                            <div class="comment-wrapper">
-                                <img src="/img/2.png" alt="" class="icon">
-                                <input type="text" class="comment-box" placeholder="Add a comment">
-                                <button class="comment-btn">comment</button>
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-                        <div class="post">
-                            <div class="info">
-                                <div class="user">
-                                    <div class="profile-pic"><img src="/img/2.png" alt=""></div>
-                                    <p class="username">Ada Lovelace</p>
-                                </div>
-                                <i class="fas fa-plus options"></i>
-                            </div>
-
-                            <img src="/img/12.jpeg" class="post-image">
-                            <div class="post-content">
-                                <div class="reaction-wrapper">
-                                    <i class="icon fas fa-heart"></i>
-                                    <i class="icon fas fa-comment"></i>
-                                </div>
-
-                                <p class="likes">420 likes</p>
-                                <p class="description"><span>User</span> This is a description</p>
-                                <p class="post-time">31/02/3045</p>
-                            </div>
-
-                            <div class="comment-wrapper">
-                                <img src="/img/2.png" alt="" class="icon">
-                                <input type="text" class="comment-box" placeholder="Add a comment">
-                                <button class="comment-btn">comment</button>
-                            </div>
-                        </div>
+                        
             </div>
             <%- include('partials/right') %>
         </div>

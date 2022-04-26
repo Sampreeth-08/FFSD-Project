@@ -8,7 +8,7 @@ var postSchema = new mongoose.Schema({
     imageName: String,
     caption: String,
     //hashtags: String,
-
+    imgPath: String,
     comments: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -22,7 +22,10 @@ var postSchema = new mongoose.Schema({
         },
 
         username: String,
-        profPic: String
+        profPic:{
+            type: String,
+            default: "/img/2.png"
+        }
     }
 }, { timestamps: true });
 
