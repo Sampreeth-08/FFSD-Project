@@ -86,14 +86,14 @@
                                 <%= post[i].likes %> likes
                             </p>
                             <p class="description"><span>
-                                <%= post[i].creator.username %>
-                            </span>
-                            <%=post[i].caption%>
-                        </p>
-                        
-                        <p class="post-time">
-                            <%= post[i].timestamp %>
-                        </p>
+                                    <%= post[i].creator.username %>
+                                </span>
+                                <%=post[i].caption%>
+                            </p>
+
+                            <p class="post-time">
+                                <%= post[i].timestamp %>
+                            </p>
                             <% if(post[i].comments.length>0){ %>
                                 <p class="description"><span>
                                         <%= post[i].comments[post[i].comments.length-1].author.username %>
@@ -101,9 +101,9 @@
                                     <%=post[i].comments[post[i].comments.length-1].text%>
                                 </p>
                                 <% } %>
-                                <p class="post-time">
-                                    <%= post[i].timestamp %>
-                                </p>
+                                    <p class="post-time">
+                                        <%= post[i].timestamp %>
+                                    </p>
                         </div>
                         <div class="comment-wrapper" style="position: absolute; margin-right: 800px;">
                             <img src="<%= currentUser %>" alt="" class="icon">
@@ -113,11 +113,11 @@
                             </form>
                         </div>
                         <br><br><br><br><br><br><br><br>
-                        
+
                     </div>
                     <br><br><br><br><br><br><br>
                     <% } %>
-                        
+
             </div>
             <%- include('partials/right') %>
         </div>
