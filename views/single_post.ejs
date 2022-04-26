@@ -7,19 +7,27 @@
                 <div class="post">
                     <div class="info">
                         <div class="user">
-                            <div class="profile-pic"><img src="/img/dp.jpg" alt=""></div>
-                            <p class="username">User</p>
+                            <div class="profile-pic">
+                                <a href="/<%= post[i].creator.id %>/userProfile ">
+                                    <img src="/display/<%= post[i].creator.profPic %>" alt="">
+                                </a>
+                            </div>
+                            <a class="username" href="/<%= post[i].creator.id %>/userProfile">
+                                <%= post[i].creator.username %>
+                            </a>
                         </div>
                     </div>
 
-                    <img src="/img/1.jpg" class="post-image">
+                    <img src="/<%= post[i].imgPath %>" class="post-image">
                     <div class="post-content">
                         <div class="reaction-wrapper">
                             <i class="icon fas fa-heart"></i>
                             <i class="icon fas fa-comment"></i>
                         </div>
 
-                        <p class="likes">420 likes</p>
+                        <p class="likes">
+                            <%= post[i].likes %> likes
+                        </p>
                         <p class="description"><span>User</span> This is a description</p>
                         <p class="post-time">31/02/3045</p>
                         <p class="description"><span>User</span> This is a description</p>
@@ -32,22 +40,7 @@
                     </div>
                 </div>
             </div>
-            <div class="right-col">
-                <div class="profile-card">
-                    <div class="profile-pic">
-                        <img src="/img/dp.jpg" alt="">
-                    </div>
-                    <div>
-                        <p class="username">User</p>
-                        <p class="sub-text">sub-text</p>
-                    </div>
-                    <button class="logout-btn">logout</button>
-                </div>
-
-                <p class="events">Stargazing Events</p>
-
-
-            </div>
+            <%- include('partials/right') %>
         </div>
     </section>
 

@@ -4,12 +4,8 @@ var Postcontent = require("../models/index");
 var User = require("../models/users");
 var middleware = require("../middleware");
 var path = require("path"),
-    crypto = require("crypto"),
     multer = require("multer"),
-    { GridFsStorage } = require("multer-gridfs-storage"),
-    Grid = require("gridfs-stream"),
     mongoose = require("mongoose"),
-    imageMagic = require("imagemagick");
     uuid=require("uuid").v4
 
 var dburl = process.env.DATABASEURL || "mongodb+srv://celestial:celestial@celestialcluster.zrcyq.mongodb.net/CelestialDB?retryWrites=true&w=majority";
@@ -64,11 +60,36 @@ router.post('/index', middleware.isLoggedIn, uploadimg.single('file'), (req, res
         else {
             console.log("Hellllooo")
             console.log(foundPost);
-            res.render("index", { post: foundPost, username: req.session.user.username });
+            res.render("index", { post: foundPost, currentUser: req.session.user.username });
             //console.log(foundPost.comments);
         }
     });
 } )
 
+router.get("/index/:id", middleware.isLoggedIn, function(req, res){
+    Postcontent.findById(req.params.id).populate("comments").exec(function(err, foundPost){
+       if(err){
+           console.log(err);
+       } 
+       else{
+           res.render("single_post", {post: foundPost});
+           //console.log(foundPost);
+           //console.log(foundPost.comments);
+       }
+    });
+ });
+
+ router.post("/index/:id", middleware.isLoggedIn, function(req, res){
+    Postcontent.findById(req.params.id).populate("comments").exec(function(err, foundPost){
+       if(err){
+           console.log(err);
+       } 
+       else{
+           res.render("single_post", {post: foundPost});
+           //console.log(foundPost);
+           //console.log(foundPost.comments);
+       }
+    });
+ });
 
 module.exports = router;

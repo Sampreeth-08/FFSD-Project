@@ -49,7 +49,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(feedRoute);
-//app.use(commentRoute);
+app.use(commentRoute);
 app.use(authRoute);
 
 app.listen(3000, function () {
