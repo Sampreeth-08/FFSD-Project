@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 var Postcontent = require("../models/index");
 var path = require("path"),
     mongoose = require("mongoose");
-    multer=require("multer")
+multer = require("multer")
 
 
 
@@ -136,7 +136,7 @@ router.post('/search', (req, res) => {
 
 router.get('/edit_profile', (req, res) => {
     //console.log(req.session.user);
-    res.render('edit_profile', {currentUser: req.session.user});
+    res.render('edit_profile', { currentUser: req.session.user });
 })
 
 let id2
@@ -153,8 +153,8 @@ const storage = multer.diskStorage({
         const finalData = Object.assign(data, { filePath: filePath })
         user = new User()
         user.profPic = filePath
-        user.username=data.username
-        user.email=data.email
+        user.username = data.username
+        user.email = data.email
         // console.log('hi');
         // console.log(data);
         // console.log(data.caption);
@@ -168,73 +168,71 @@ const upload = multer({ storage: storage });
 
 router.post('/edit_profile', middleware.isLoggedIn, upload.single('file'), (req, res) => {
     //updateRecord(req, res);
-    User.findByIdAndUpdate(id2)
-        .exec((err, foundUser)=>{
-            if(err) {
-                console.log(err);
-            } else {
-                if(req.body.username){
-                    foundUser.username=req.body.username
-                }
-                if(req.body.email){
-                    foundUser.email=req.body.email
-                }
-                if(req.body.bio){
-                    foundUser.email=req.body.bio
-                }
-                foundUser.save()
-            }
-        })
-    
+    // User.findByIdAndUpdate(id2)
+    //     .exec((err, foundUser)=>{
+    //         if(err) {
+    //             console.log(err);
+    //         } else {
+    //             if(req.body.username){
+    //                 foundUser.username=req.body.username
+    //             }
+    //             if(req.body.email){
+    //                 foundUser.email=req.body.email
+    //             }
+    //             if(req.body.bio){
+    //                 foundUser.email=req.body.bio
+    //             }
+    //             foundUser.save()
+    //         }
+    //     })
 
-
-
-
+    updateRecord(req, res)
 })
-// function updateRecord(req, res) {
-//     let foundid;
-//     User.find({ email: req.body.email }).then((result) => {
-//         foundid = result[0]._id
-//         User.findByIdAndUpdate({ _id: foundid }, {
-//             username: req.body.username
-//         }, { new: true }, (err, doc) => {
-//             if (!err) { res.redirect('/edit_profile'); }
-//             else {
-//                 console.log('Error during record update : ' + err);
-//             }
-//         });
-//     })
+function updateRecord(req, res) {
+    let foundid;
+    User.find({ email: req.body.email }).then((result) => {
+        foundid = result[0]._id
+        User.findByIdAndUpdate({ _id: foundid }, {
+            username: req.body.username,
+            bio: req.body.bio
+        }, { new: true }, (err, doc) => {
+            if (!err) { res.redirect('/edit_profile'); }
+            else {
+                console.log('Error during record update : ' + err);
+            }
+        });
+    })
 
-// }
+}
 
 
-router.get("/:id/profile", middleware.isLoggedIn, function(req, res){
-    Postcontent.find({"creator.id": req.session.user.id}, (err, foundPost)=>{
-        if(err){
+router.get("/:id/profile", middleware.isLoggedIn, function (req, res) {
+    Postcontent.find({ "creator.id": req.session.user.id }, (err, foundPost) => {
+        if (err) {
             console.log(err);
         }
-        else{
-            res.render("profile", {post: foundPost, currentUser: req.session.user})
+        else {
+            res.render("profile", { post: foundPost, currentUser: req.session.user })
         }
     })
 })
 
-router.get("/:id/profile", middleware.isLoggedIn, function(req, res){
-    User.findById(req.params.id, function(err, foundUser){
-       if(err){
-           console.log(err);
-       } 
-       else{
-            Postcontent.find({"creator.id": req.params.id}), function(err, foundPost){
-                if(err){
+router.get("/:id/profile", middleware.isLoggedIn, function (req, res) {
+    User.findById(req.params.id, function (err, foundUser) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            Postcontent.find({ "creator.id": req.params.id }), function (err, foundPost) {
+                if (err) {
                     console.log(err);
                 }
-                else{
-                    res.render("user_profile", {user: foundUser, post: foundPost});
+                else {
+                    res.render("user_profile", { user: foundUser, post: foundPost });
                 }
             }
-           
-       }
+
+        }
     });
 });
 
