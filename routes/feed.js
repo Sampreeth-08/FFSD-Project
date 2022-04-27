@@ -6,7 +6,7 @@ var middleware = require("../middleware");
 var path = require("path"),
     multer = require("multer"),
     mongoose = require("mongoose"),
-    uuid=require("uuid").v4
+    uuid = require("uuid").v4
 
 var dburl = process.env.DATABASEURL || "mongodb+srv://celestial:celestial@celestialcluster.zrcyq.mongodb.net/CelestialDB?retryWrites=true&w=majority";
 var conn = mongoose.createConnection(dburl);
@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
         const id = uuid();
         let data = req.body;
         const filePath = `postimgs/${id}${ext}`;
-        const finalData = Object.assign(data, {filePath: filePath})
+        const finalData = Object.assign(data, { filePath: filePath })
         const post = new Postcontent(data)
         post.imgPath = filePath
         post.creator.username=req.session.user.username
@@ -36,7 +36,7 @@ const storage = multer.diskStorage({
         )
     }
 })
-const uploadimg = multer({storage: storage});
+const uploadimg = multer({ storage: storage });
 
 router.get("/index", middleware.isLoggedIn, uploadimg.single('file'), function (req, res) {
     Postcontent.find({}).populate("comments").exec(function (err, foundPost) {
@@ -64,33 +64,33 @@ router.post('/index', middleware.isLoggedIn, uploadimg.single('file'), (req, res
             //console.log(foundPost.comments);
         }
     });
-} )
+})
 
-router.get("/index/:id", middleware.isLoggedIn, function(req, res){
-    Postcontent.findById(req.params.id).populate("comments").exec(function(err, foundPost){
-       if(err){
-           console.log(err);
-       } 
-       else{
-           res.render("single_post", {post: foundPost});
-           //console.log(foundPost);
-           //console.log(foundPost.comments);
-       }
+router.get("/index/:id", middleware.isLoggedIn, function (req, res) {
+    Postcontent.findById(req.params.id).populate("comments").exec(function (err, foundPost) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.render("single_post", { post: foundPost });
+            //console.log(foundPost);
+            //console.log(foundPost.comments);
+        }
     });
- });
+});
 
- router.post("/index/:id", middleware.isLoggedIn, function(req, res){
-    Postcontent.findById(req.params.id).populate("comments").exec(function(err, foundPost){
-       if(err){
-           console.log(err);
-       } 
-       else{
-           res.render("single_post", {post: foundPost});
-           //console.log(foundPost);
-           //console.log(foundPost.comments);
-       }
+router.post("/index/:id", middleware.isLoggedIn, function (req, res) {
+    Postcontent.findById(req.params.id).populate("comments").exec(function (err, foundPost) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.render("single_post", { post: foundPost });
+            //console.log(foundPost);
+            //console.log(foundPost.comments);
+        }
     });
- });
+});
 
 
  router.get("/discover", middleware.isLoggedIn, function (req, res) {

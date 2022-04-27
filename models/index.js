@@ -22,7 +22,7 @@ var postSchema = new mongoose.Schema({
         },
 
         username: String,
-        profPic:{
+        profPic: {
             type: String,
             default: "/img/2.png"
         }

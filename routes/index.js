@@ -144,7 +144,6 @@ router.post('/edit_profile', (req, res, next) => {
 function updateRecord(req, res) {
     let foundid;
     User.find({ email: req.body.email }).then((result) => {
-        // foundid = result[0]._id.toString();
         foundid = result[0]._id
         User.findByIdAndUpdate({ _id: foundid }, {
             username: req.body.username
@@ -190,4 +189,34 @@ router.get("/:id/othersProfile", middleware.isLoggedIn, function(req, res){
 });
 
 
+router.get('/adminlogin', (req, res) => {
+    res.render('admin');
+})
+router.post('/adminlogin', (req, res) => {
+    let email = req.body.email;
+    let password = req.body.password;
+    if (email === 'ganajayant28@gmail.com' && password === 'ganajayant28') {
+        User.find({}).then((result) => {
+            res.render('userlist', { x: result })
+        })
+    }
+    else {
+        res.redirect('adminlogin');
+    }
+})
+router.post('/customerdelete/:_id', (req, res) => {
+    User.findOneAndRemove({ _id: req.params._id }, function (err) {
+        if (err) {
+            console.log(err.message);
+            User.find({}).then((result) => {
+                res.render('userlist', { x: result })
+            })
+        }
+        else {
+            User.find({}).then((result) => {
+                res.render('userlist', { x: result })
+            })
+        }
+    });
+})
 module.exports = router;

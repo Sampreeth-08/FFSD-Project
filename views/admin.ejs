@@ -47,9 +47,8 @@
                         <div class="logo">
                             <img src="/img/logo.png" class="logo-img" alt="">
                         </div>
-                        <form action="/signup" class="signup-form" id="signup-form" method="post">
-                            <p id="error_message" class="text-center alert-danger">
-                            </p>
+                        <form action="/adminlogin" class="login-form" id="login-form" method="post">
+
                             <div class="msg-container">
                                 <% if(error && error.length>0){ %>
                                     <div class="alert alert-danger" role="alert">
@@ -71,33 +70,14 @@
                             </div>
                             <div class="form-group">
                                 <div class="login-input">
-                                    <input type="text" name="username" placeholder="Enter username" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="login-input">
                                     <input type="password" name="password" id="password" placeholder="Enter password"
                                         required>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="login-input">
-                                    <input type="password" name="password_confirm" id="confirm_password"
-                                        placeholder="Confirm password" required>
-                                </div>
-                            </div>
                             <div class="btn-group">
-                                <button class="login-btn" id="signup_btn" type="submit">Sign Up</button>
+                                <button class="login-btn" id="login_btn" type="submit">Log In</button>
                             </div>
                         </form>
-                        <div class="or">
-                            <hr>
-                            <span>OR</span>
-                            <hr>
-                        </div>
-                        <div class="goto">
-                            <p>Already have an account? <a href="/login">Log In</a></p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -108,39 +88,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <script>
-        let form = document.getElementById('signup-form')
-        function verifyForm() {
-            let password = document.getElementById('password').value;
-            let confirm_password = document.getElementById('confirm_password').value;
-            let error_message = document.getElementById('error_message');
-            let reguser = /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
-            let repassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-            let str = ``;
-            // if (!repassword.test(password)) {
-            //     str += `Ensure password has one special case letter.<br>Ensure password has two digits.<br>Ensure password is of length 8.`
-            // }
-
-            if (password !== confirm_password) {
-                str += `<br>Passwords don't match`;
-            }
-            if (str !== ``) {
-                error_message.innerHTML = str;
-                return false;
-            }
-            else {
-                return true;
-            }
-        }
-
-        document.getElementById('signup-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            console.log(verifyForm());
-            if (verifyForm()) {
-                form.submit();
-            }
-        })
-    </script>
 </body>
 
 </html>

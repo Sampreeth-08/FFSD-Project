@@ -52,7 +52,10 @@
                                     </span>
                                     <%=post[i].comments[post[i].comments.length-1].text%>
                                 </p>
-                                <% } %> -->
+                                <% } %>
+                                    <p class="post-time">
+                                        <%= post[i].timestamp %>
+                                    </p>
                         </div>
 
                         <% if(post[i].comments.length>0){ %>
@@ -74,11 +77,11 @@
                             </form>
                         </div>
                         <br><br><br><br><br><br><br><br>
-                        
+
                     </div>
                     <br><br><br><br><br><br><br>
                     <% } %>
-                        
+
             </div>
             <%- include('partials/right') %>
         </div>
