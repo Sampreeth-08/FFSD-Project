@@ -4,7 +4,10 @@ var userSchema = new mongoose.Schema({
    username: String,
    email: String,
    password: String,
-   profPic: String,
+   profPic:{
+      type: String,
+      default: "/img/2.png"
+  },
    pictures: []
 });
 

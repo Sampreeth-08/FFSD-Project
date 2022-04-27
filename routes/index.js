@@ -1,9 +1,9 @@
 var express = require("express");
 var router = express.Router();
 var User = require("../models/users");
-var passport = require("passport");
 var middleware = require("../middleware");
 const bcrypt = require('bcrypt');
+var Postcontent = require("../models/index");
 var path = require("path"),
     mongoose = require("mongoose");
 
@@ -133,8 +133,11 @@ router.post('/search', (req, res) => {
     }
 })
 router.get('/edit_profile', (req, res) => {
-    res.render('edit_profile');
+    res.render('edit_profile', {currentUser: req.session.user});
 })
+
+
+
 router.post('/edit_profile', (req, res, next) => {
     updateRecord(req, res);
 })
@@ -154,4 +157,37 @@ function updateRecord(req, res) {
     })
 
 }
+
+
+router.get("/:id/profile", middleware.isLoggedIn, function(req, res){
+    Postcontent.find({"creator.id": req.session.user.id}, (err, foundPost)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.render("profile", {post: foundPost, currentUser: req.session.user})
+        }
+    })
+})
+
+router.get("/:id/othersProfile", middleware.isLoggedIn, function(req, res){
+    User.findById(req.params.id, function(err, foundUser){
+       if(err){
+           console.log(err);
+       } 
+       else{
+            Postcontent.find({"creator.id": req.params.id}), function(err, foundPost){
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    res.render("user_profile", {user: foundUser, post: foundPost});
+                }
+            }
+           
+       }
+    });
+});
+
+
 module.exports = router;

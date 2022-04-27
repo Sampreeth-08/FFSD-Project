@@ -11,21 +11,6 @@ var path = require("path"),
 var dburl = process.env.DATABASEURL || "mongodb+srv://celestial:celestial@celestialcluster.zrcyq.mongodb.net/CelestialDB?retryWrites=true&w=majority";
 var conn = mongoose.createConnection(dburl);
 
-
-
-router.get("/index", middleware.isLoggedIn, function (req, res) {
-    Postcontent.find({}).populate("comments").exec(function (err, foundPost) {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            //console.log(foundPost);
-            res.render("index", { post: foundPost, username: req.session.user.username });
-            //console.log(foundPost.comments);
-        }
-    });
-});
-
 router.get("/camera", middleware.isLoggedIn, function (req, res) {
     res.render("camera");
 });
@@ -45,12 +30,26 @@ const storage = multer.diskStorage({
         const post = new Postcontent(data)
         post.imgPath = filePath
         post.creator.username=req.session.user.username
+        post.caption=data.caption
         post.save().then(
             cb(null, filePath)
         )
     }
 })
 const uploadimg = multer({storage: storage});
+
+router.get("/index", middleware.isLoggedIn, uploadimg.single('file'), function (req, res) {
+    Postcontent.find({}).populate("comments").exec(function (err, foundPost) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            //console.log(foundPost);
+            res.render("index", { post: foundPost, currentUser: req.session.user });
+            //console.log(foundPost.comments);
+        }
+    });
+});
 
 router.post('/index', middleware.isLoggedIn, uploadimg.single('file'), (req, res) => {
     Postcontent.find({}).populate("comments").exec(function (err, foundPost) {
@@ -60,7 +59,8 @@ router.post('/index', middleware.isLoggedIn, uploadimg.single('file'), (req, res
         else {
             console.log("Hellllooo")
             console.log(foundPost);
-            res.render("index", { post: foundPost, currentUser: req.session.user.username });
+            console.log(req.session.user);
+            res.render("index", { post: foundPost, currentUser: req.session.user });
             //console.log(foundPost.comments);
         }
     });
@@ -91,5 +91,20 @@ router.get("/index/:id", middleware.isLoggedIn, function(req, res){
        }
     });
  });
+
+
+ router.get("/discover", middleware.isLoggedIn, function (req, res) {
+    Postcontent.find({}, (err, foundPost)=>{
+        if (err) {
+            console.log(err);
+        }
+        else {
+            //console.log(foundPost);
+            res.render("discover", { post: foundPost, currentUser: req.session.user });
+            //console.log(foundPost.comments);
+        }
+    })        
+});
+
 
 module.exports = router;

@@ -5,10 +5,7 @@ var methodOverride = require("method-override");
 var flash = require("connect-flash");
 var path = require("path");
 
-var User = require("./models/users"),
-  passport = require("passport"),
-  localStrategy = require("passport-local"),
-  passportLocalMongoose = require("passport-local-mongoose");
+var User = require("./models/users")
 
 var feedRoute = require("./routes/feed"),
   commentRoute = require("./routes/comments"),

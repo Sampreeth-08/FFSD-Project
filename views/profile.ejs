@@ -2,15 +2,14 @@
 
 
     <header class="profile-header">
-        <p></p>
         <div class="profile-container">
             <div class="profile">
                 <div class="profile-image">
-                    <img src="/img/dp.jpg" alt="">
+                    <img src="<%= currentUser.profPic %> " alt="">
                 </div>
                 <div class="profile-user-settings">
                     <h1 class="profile-user-name">
-                        <%=(typeof username !="undefined" ? username : "" )%>
+                        <%= currentUser.username %>
                     </h1>
                     <button class="profile-btn profile-edit-btn">Edit Profile</button>
                     <button class="profile-btn profile-settings-btn" id="options_btn" aria-label="profile-settings">
@@ -28,21 +27,15 @@
                 <div class="profile-stats">
                     <ul>
                         <li><span class="profile-stat-count">
-                                <%=(typeof posts !="undefined" ? posts : "" )%>
+                                <%=post.length%>
                             </span> posts</li>
-                        <li><span class="profile-stat-count">
-                                <%=(typeof followers !="undefined" ? followers : "" )%>
-                            </span> followers</li>
-                        <li><span class="profile-stat-count">
-                                <%=(typeof following !="undefined" ? following : "" )%>
-                            </span> following</li>
                     </ul>
                 </div>
                 <div class="profile-bio">
                     <p><span class="profile-real-name">
-                            <%=(typeof username !="undefined" ? username : "" )%>
+                            <%= currentUser.username %>
                         </span>
-                        <%=(typeof bio !="undefined" ? bio : "" )%>
+                        <%= currentUser.bio %>
                     </p>
                 </div>
             </div>
@@ -52,45 +45,22 @@
     <main>
         <div class="profile-container">
             <div class="gallery">
-                <div class="gallery-item">
-                    <img src="/img/4.jpg" class="gallery-image" alt="">
-                    <div class="gallery-item-info">
-                        <ul>
-                            <li class="gallery-item-likes"><span class="hide-gallery">Likes:</span>
-                                <i class="fas fa-heart"></i>
-                            </li>
-                            <li class="gallery-item-comments"><span class="hide-gallery">Comments:</span>
-                                <i class="fas fa-comment"></i>
-                            </li>
-                        </ul>
+
+                <% for(var i=(post.length-1); i>=0; i--){ %> 
+                    <div class="gallery-item">
+                        <img src="<%= post[i].imgPath %> " class="gallery-image" alt="">
+                        <div class="gallery-item-info">
+                            <ul>
+                                <li class="gallery-item-likes"><span class="hide-gallery"><%= post[i].likes %> </span>
+                                    <i class="fas fa-heart"></i>
+                                </li>
+                                <li class="gallery-item-comments"><span class="hide-gallery"><%= post[i].comments.length %>  </span>
+                                    <i class="fas fa-comment"></i>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="/img/4.jpg" class="gallery-image" alt="">
-                    <div class="gallery-item-info">
-                        <ul>
-                            <li class="gallery-item-likes"><span class="hide-gallery">Likes:</span>
-                                <i class="fas fa-heart"></i>
-                            </li>
-                            <li class="gallery-item-comments"><span class="hide-gallery">Comments:</span>
-                                <i class="fas fa-comment"></i>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="/img/4.jpg" class="gallery-image" alt="">
-                    <div class="gallery-item-info">
-                        <ul>
-                            <li class="gallery-item-likes"><span class="hide-gallery">56</span>
-                                <i class="fas fa-heart"></i>
-                            </li>
-                            <li class="gallery-item-comments"><span class="hide-gallery">33</span>
-                                <i class="fas fa-comment"></i>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <% } %> 
             </div>
         </div>
     </main>
