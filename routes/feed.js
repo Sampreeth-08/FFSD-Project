@@ -30,6 +30,7 @@ const storage = multer.diskStorage({
         post = new Postcontent()
         post.imgPath = filePath
         post.creator.username=req.session.user.username
+        post.creator.id=req.session.user._id
         post.caption=data.caption
         console.log('hi');
         console.log(data);
@@ -49,6 +50,7 @@ router.get("/index", middleware.isLoggedIn, function (req, res) {
         }
         else {
             //console.log(foundPost);
+            console.log(foundPost);
             res.render("index", { post: foundPost, currentUser: req.session.user });
             //console.log(foundPost.comments);
         }

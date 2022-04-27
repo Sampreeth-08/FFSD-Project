@@ -8,13 +8,14 @@
                         <div class="info">
                             <div class="user">
                                 <div class="profile-pic">
-                                    <a href="/<%= post[i].creator.id %>/profile ">
+                                    <a href="/profile/<%= post[i].creator._id %>">
                                         <img src="<%= post[i].creator.profPic %>" alt="">
                                     </a>
                                 </div>
-                                <a class="username" href="/<%= post[i].creator.id %>/userProfile">
+                                <a class="username" href="/profile/<%= post[i].creator._id %>">
                                     <%= post[i].creator.username %>
                                 </a>
+                                    
                             </div>
                             <i class="fas fa-plus options"></i>
                         </div>
