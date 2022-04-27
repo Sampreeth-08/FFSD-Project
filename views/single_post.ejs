@@ -31,9 +31,16 @@
                         
 
 
-                        <p class="description"><span>User</span> This is a description</p>
+                        <!-- <p class="description"><span>User</span> This is a description</p>
                         <p class="post-time">31/02/3045</p>
-                        <p class="description"><span>User</span> This is a description</p>
+                        <p class="description"><span>User</span> This is a description</p> -->
+                        <% for(var i=(post.comments.length-1); i>=0; i--){ %> 
+                            <p class="description"><span>
+                                <%= post.comments[i].author.username %>
+                            </span>
+                            <%=post.comments[i].text%>
+                    </p>
+                        <% } %> 
                     </div>
 
                     <div class="comment-wrapper">
