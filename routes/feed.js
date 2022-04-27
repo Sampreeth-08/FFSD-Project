@@ -15,8 +15,8 @@ router.get("/camera", middleware.isLoggedIn, function (req, res) {
     res.render("camera");
 });
 
-
-
+let id1
+let post
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './public');
@@ -27,18 +27,22 @@ const storage = multer.diskStorage({
         let data = req.body;
         const filePath = `postimgs/${id}${ext}`;
         const finalData = Object.assign(data, { filePath: filePath })
-        const post = new Postcontent(data)
+        post = new Postcontent()
         post.imgPath = filePath
         post.creator.username=req.session.user.username
         post.caption=data.caption
+        console.log('hi');
+        console.log(data);
+        console.log(data.caption);
         post.save().then(
             cb(null, filePath)
         )
+        id1 = post._id
     }
 })
-const uploadimg = multer({ storage: storage });
+const upload = multer({ storage: storage });
 
-router.get("/index", middleware.isLoggedIn, uploadimg.single('file'), function (req, res) {
+router.get("/index", middleware.isLoggedIn, function (req, res) {
     Postcontent.find({}).populate("comments").exec(function (err, foundPost) {
         if (err) {
             console.log(err);
@@ -51,15 +55,29 @@ router.get("/index", middleware.isLoggedIn, uploadimg.single('file'), function (
     });
 });
 
-router.post('/index', middleware.isLoggedIn, uploadimg.single('file'), (req, res) => {
+router.post('/index', middleware.isLoggedIn, upload.single('file'), (req, res) => {
+    Postcontent.findByIdAndUpdate(id1)
+        .exec((err, foundPost) => {
+            if(err) {
+                console.log(err);
+            } else {
+                // console.log('sam');
+                // console.log(foundPost);
+                // console.log(req.body.caption);
+                foundPost.caption = req.body.caption
+                foundPost.save()
+            }
+        })
+    console.log('hey');
+    console.log(req.body.caption);
     Postcontent.find({}).populate("comments").exec(function (err, foundPost) {
         if (err) {
             console.log(err);
         }
         else {
-            console.log("Hellllooo")
-            console.log(foundPost);
-            console.log(req.session.user);
+            // console.log("Hellllooo")
+            // console.log(foundPost);
+            // console.log(req.session.user);
             res.render("index", { post: foundPost, currentUser: req.session.user });
             //console.log(foundPost.comments);
         }

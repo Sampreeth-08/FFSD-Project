@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 var Postcontent = require("../models/index");
 var path = require("path"),
     mongoose = require("mongoose");
+    multer=require("multer")
 
 
 
@@ -132,30 +133,79 @@ router.post('/search', (req, res) => {
         res.redirect('/index')
     }
 })
+
 router.get('/edit_profile', (req, res) => {
+    //console.log(req.session.user);
     res.render('edit_profile', {currentUser: req.session.user});
 })
 
-
-
-router.post('/edit_profile', (req, res, next) => {
-    updateRecord(req, res);
+let id2
+let post
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './public');
+    },
+    filename: (req, file, cb) => {
+        const ext = path.extname(file.originalname);
+        const id = uuid();
+        let data = req.body;
+        const filePath = `postimgs/${id}${ext}`;
+        const finalData = Object.assign(data, { filePath: filePath })
+        user = new User()
+        user.profPic = filePath
+        user.username=data.username
+        user.email=data.email
+        // console.log('hi');
+        // console.log(data);
+        // console.log(data.caption);
+        post.save().then(
+            cb(null, filePath)
+        )
+        id2 = user._id
+    }
 })
-function updateRecord(req, res) {
-    let foundid;
-    User.find({ email: req.body.email }).then((result) => {
-        foundid = result[0]._id
-        User.findByIdAndUpdate({ _id: foundid }, {
-            username: req.body.username
-        }, { new: true }, (err, doc) => {
-            if (!err) { res.redirect('/edit_profile'); }
-            else {
-                console.log('Error during record update : ' + err);
-            }
-        });
-    })
+const upload = multer({ storage: storage });
 
-}
+router.post('/edit_profile', middleware.isLoggedIn, upload.single('file'), (req, res) => {
+    //updateRecord(req, res);
+    User.findByIdAndUpdate(id2)
+        .exec((err, foundUser)=>{
+            if(err) {
+                console.log(err);
+            } else {
+                if(req.body.username){
+                    foundUser.username=req.body.username
+                }
+                if(req.body.email){
+                    foundUser.email=req.body.email
+                }
+                if(req.body.bio){
+                    foundUser.email=req.body.bio
+                }
+                foundUser.save()
+            }
+        })
+    
+
+
+
+
+})
+// function updateRecord(req, res) {
+//     let foundid;
+//     User.find({ email: req.body.email }).then((result) => {
+//         foundid = result[0]._id
+//         User.findByIdAndUpdate({ _id: foundid }, {
+//             username: req.body.username
+//         }, { new: true }, (err, doc) => {
+//             if (!err) { res.redirect('/edit_profile'); }
+//             else {
+//                 console.log('Error during record update : ' + err);
+//             }
+//         });
+//     })
+
+// }
 
 
 router.get("/:id/profile", middleware.isLoggedIn, function(req, res){
@@ -169,7 +219,7 @@ router.get("/:id/profile", middleware.isLoggedIn, function(req, res){
     })
 })
 
-router.get("/:id/othersProfile", middleware.isLoggedIn, function(req, res){
+router.get("/:id/profile", middleware.isLoggedIn, function(req, res){
     User.findById(req.params.id, function(err, foundUser){
        if(err){
            console.log(err);
