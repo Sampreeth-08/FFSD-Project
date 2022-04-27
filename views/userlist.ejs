@@ -36,13 +36,13 @@
                         <p>
                             <%= x[i].username %>
                         </p>
+                        <form action="/customerdelete/<%= x[i]._id%>" method="post">
+                            <div class="search-result-item-btn">
+                                <button style="margin-left: 1350px;"><i class="fa-solid fa-ban"></i></button>
+                            </div>
+                        </form>
                     </div>
                 </li>
-                <form action="/customerdelete/<%= x[i]._id%>" method="post">
-                    <div class="search-result-item-btn">
-                        <button>Delete</button>
-                    </div>
-                </form>
                 <% } %>
 
         </ul>
