@@ -92,7 +92,7 @@ router.get("/index/:id", middleware.isLoggedIn, function (req, res) {
             console.log(err);
         }
         else {
-            res.render("single_post", { post: foundPost });
+            res.render("single_post", { post: foundPost, currentUser:req.session.user });
             //console.log(foundPost);
             //console.log(foundPost.comments);
         }
@@ -105,7 +105,7 @@ router.post("/index/:id", middleware.isLoggedIn, function (req, res) {
             console.log(err);
         }
         else {
-            res.render("single_post", { post: foundPost });
+            res.render("single_post", { post: foundPost, currentUser:req.session.user });
             //console.log(foundPost);
             //console.log(foundPost.comments);
         }
